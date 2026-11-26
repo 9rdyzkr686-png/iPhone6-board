@@ -398,6 +398,8 @@
           <p class="asof" id="wxWave"></p>
           <div class="mini-row">📍 地点を追加：<input type="text" id="geoInput" placeholder="例：札幌" size="10" /> <button type="button" id="geoBtn">検索して追加</button> <span id="geoView"></span></div>
           <p id="wxIndex" style="font-size:.95rem;font-weight:700;"></p>
+          <p id="heatView" style="font-size:.95rem;font-weight:700;"></p>
+          <div style="margin-top:4px;"><span style="font-weight:700;">🌙 月と潮（概算）</span><br /><canvas id="moonCanvas" width="72" height="72" style="width:72px;height:72px;"></canvas><div class="asof" id="moonView"></div></div>
           <p class="asof" id="wxAsof"></p>
         </section>
 
@@ -681,6 +683,20 @@
           <div class="playbox">
             <h3>🗞 地元ニュース（ふじみ野・川越エリア）</h3>
             <ul class="news-list" id="newsLocal"></ul>
+          </div>
+          <div class="playbox">
+            <h3>🏢 ふじみ野市からのお知らせ</h3>
+            <ul class="news-list" id="newsCity"></ul>
+          </div>
+          <div class="playbox">
+            <h3>🔗 地元リンク集</h3>
+            <div class="mini-row" style="line-height:2.4;">
+              <a href="https://www.tobu.co.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🚃 東武鉄道（時刻表・運行情報）</a><br />
+              <a href="https://www.city.fujimino.saitama.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🏢 ふじみ野市役所</a><br />
+              <a href="https://www.city.kawagoe.saitama.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🏯 川越市役所</a><br />
+              <a href="https://www.jma.go.jp/jma/index.html" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🌦 気象庁</a><br />
+              <a href="https://www3.nhk.or.jp/news/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">📺 NHKニュース</a>
+            </div>
           </div>
           <div class="playbox">
             <h3>⚾ スポーツニュース</h3>
@@ -1948,6 +1964,39 @@
         if (age < 20.3) return "🌖"; if (age < 24.0) return "🌗";
         return "🌘";
       }
+      function tideName(age) {
+        if (age < 2.0 || age >= 28.0 || (age >= 13.8 && age < 16.8)) return "大潮";
+        if ((age >= 5.9 && age < 8.9) || (age >= 20.9 && age < 23.9)) return "小潮";
+        if ((age >= 8.9 && age < 10.9) || (age >= 23.9 && age < 25.9)) return "長潮";
+        if ((age >= 10.9 && age < 13.8) || (age >= 25.9 && age < 28.0)) return "若潮";
+        return "中潮";
+      }
+      function moonPhaseName(age) {
+        if (age < 1.8) return "新月"; if (age < 5.5) return "三日月";
+        if (age < 9.2) return "上弦の月"; if (age < 12.9) return "十三夜に近い月";
+        if (age < 16.6) return "満月"; if (age < 20.3) return "満月過ぎの月";
+        if (age < 24.0) return "下弦の月"; return "有明月";
+      }
+      function fmtMin(m) {
+        m = ((Math.round(m) % 1440) + 1440) % 1440;
+        var h = Math.floor(m / 60), mm = m % 60;
+        return (h < 10 ? "0" : "") + h + ":" + (mm < 10 ? "0" : "") + mm;
+      }
+      function drawMoon(age) {
+        var cv = document.getElementById("moonCanvas");
+        if (!cv || !cv.getContext) return;
+        var ctx = cv.getContext("2d");
+        var cx = 36, cy = 36, r = 30;
+        ctx.clearRect(0, 0, 72, 72);
+        ctx.fillStyle = "#f7dc6f";
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.3); ctx.fill();
+        var ph = age / 29.53059;
+        var dx = -2 * r * Math.cos(ph * 2 * Math.PI);
+        ctx.fillStyle = "#23272e";
+        ctx.beginPath(); ctx.arc(cx + dx, cy, r - 1, 0, 6.3); ctx.fill();
+        ctx.strokeStyle = "#8a8f98"; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.3); ctx.stroke();
+      }
       function renderHoursSun() {
         var loc = LOCATIONS[curLoc];
         var ver = curLoc + "|" + (loc.sunrise || "") + "|" + ((HOURLY[curLoc] || []).length);
@@ -1956,6 +2005,13 @@
         document.getElementById("wxSun").textContent =
           "日の出 " + (loc.sunrise || "--:--") + " ／ 日の入り " + (loc.sunset || "--:--") +
           " ／ 月齢 " + age.toFixed(1) + " " + moonEmoji(age);
+        drawMoon(age);
+        var mv = document.getElementById("moonView");
+        if (mv) {
+          var rise = 360 + age * 48.4;
+          mv.textContent = moonPhaseName(age) + " ／ 潮：" + tideName(age) +
+            " ／ 月の出 " + fmtMin(rise) + "頃 ／ 月の入り " + fmtMin(rise + 745) + "頃（概算）";
+        }
         if (ver === lastHoursVer) return;
         lastHoursVer = ver;
         var box = document.getElementById("wxHours");
@@ -2421,6 +2477,14 @@
         var uv = (loc.uv != null) ? (" ／ UV指数 " + loc.uv.toFixed(0) + (loc.uv >= 6 ? "（強い・日焼け注意）" : loc.uv >= 3 ? "（中くらい）" : "（弱い）")) : "";
         var pm = (AQ[curLoc] != null) ? (" ／ PM2.5 " + Math.round(AQ[curLoc]) + "µg/m³") : "";
         document.getElementById("wxIndex").textContent = "生活指数：" + kasa + " ／ " + sentaku + " ／ 服装：" + fukuso + uv + pm;
+        var hv = document.getElementById("heatView");
+        if (hv) {
+          var heat = d.hi >= 35 ? "🥵 熱中症：危険（最高気温" + Math.round(d.hi) + "℃・外出は控えめに）"
+            : d.hi >= 31 ? "🔥 熱中症：厳重警戒（こまめな休憩と水分を）"
+            : d.hi >= 28 ? "⚠️ 熱中症：警戒（水分補給を忘れずに）"
+            : d.hi >= 25 ? "熱中症：注意（無理のない範囲で）" : "熱中症：ほぼ安全";
+          hv.textContent = heat + "（気温からの目安）";
+        }
       }
       document.getElementById("locTabs").addEventListener("click", function () { setTimeout(renderIndices, 90); });
       setInterval(renderIndices, 6000);
@@ -2909,9 +2973,30 @@
             } catch (e) {}
           }, function () {});
         }
+        /* ふじみ野市公式RSS */
+        function loadFeedList(elmId, rssUrl) {
+          var url = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rssUrl);
+          getJSON2(url, function (j) {
+            try {
+              var ul = el(elmId); ul.innerHTML = "";
+              (j.items || []).slice(0, 5).forEach(function (it) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = it.link; a.target = "_blank"; a.rel = "noopener";
+                var dt = "";
+                if (it.pubDate && it.pubDate.length >= 10) dt = "（" + it.pubDate.substring(5, 7) + "/" + it.pubDate.substring(8, 10) + "）";
+                a.textContent = (it.title || "") + dt;
+                li.appendChild(a);
+                ul.appendChild(li);
+              });
+              if (!ul.children.length) ul.innerHTML = "<li>お知らせを取得できませんでした</li>";
+            } catch (e) {}
+          }, function () { var ul = el(elmId); if (ul && !ul.children.length) ul.innerHTML = "<li>お知らせを取得できませんでした</li>"; });
+        }
         /* 相場・ISS・雑学 */
         function fetchNetAll() {
           fetchSea();
+          loadFeedList("newsCity", "https://www.city.fujimino.saitama.jp/cgi-bin/feed.php?siteNew=1");
           loadNewsList("newsLocal", '"ふじみ野市" OR "川越市"');
           loadNewsList("newsSports", "スポーツ");
           loadNewsList("newsGei", "芸能");
