@@ -334,6 +334,17 @@
       .collgrid span.got { opacity: 1; }
       .sugoroku-cell { display: inline-block; width: 15.5%; margin: .5%; text-align: center; background: var(--surface-2); border-radius: 8px; padding: 6px 0; font-size: 12px; }
       .sugoroku-cell.here { background: #ffe082; font-weight: 700; }
+      #koeBar { position: fixed; left: 0; right: 0; top: 0; z-index: 130; background: #b3541e; color: #fff; font-size: 26px; font-weight: 900; text-align: center; padding: 12px 12px; display: none; line-height: 1.35; }
+      #koeClose { display: block; margin: 8px auto 0; font-size: 15px; padding: 6px 14px; }
+      .tojo-board { background: #141414; color: #ffb340; border-radius: 10px; padding: 10px 12px; font-weight: 700; font-size: 17px; line-height: 1.9; letter-spacing: .03em; white-space: pre-line; }
+      .tojo-board .dest { color: #7fd4ff; }
+      #mirrorVideo { width: 100%; max-width: 320px; border-radius: 10px; background: #000; display: none; transform: scaleX(-1); -webkit-transform: scaleX(-1); }
+      .megane-big { font-size: 32px; font-weight: 900; line-height: 1.5; padding: 10px; background: var(--surface-2); border-radius: 10px; word-break: break-all; white-space: pre-line; }
+      body.meganeall .playlog, body.meganeall .mini-row, body.meganeall .asof { font-size: 135%; }
+      .wx-idx { font-size: .95rem; font-weight: 700; margin: 2px 0; }
+      .sentaku-cell { display: inline-block; text-align: center; background: var(--surface-2); border-radius: 8px; padding: 4px 6px; margin: 2px; font-size: 12px; min-width: 46px; }
+      .price-table { border-collapse: collapse; font-size: 14px; margin-top: 4px; }
+      .price-table td, .price-table th { border: 1px solid #bbb; padding: 3px 8px; text-align: left; }
     </style>
   </head>
   <body>
@@ -349,7 +360,9 @@
           <h2>今日のまとめ <span class="tag">開いて3秒</span></h2>
           <div class="playlog" id="digestView" style="font-size:17px;">読み込み中…</div>
           <div class="playlog" id="eventBanner" style="font-weight:700;color:#b3541e;"></div>
+          <div class="playlog" id="bdayBanner" style="font-weight:700;color:#c2185b;"></div>
           <div class="playlog" id="soraView"></div>
+          <div class="playlog" id="luckyView" style="font-weight:700;"></div>
           <div class="playlog" id="wordView"></div>
           <div class="playlog" id="kanjiView"></div>
         </section>
@@ -399,7 +412,13 @@
           <div class="mini-row">📍 地点を追加：<input type="text" id="geoInput" placeholder="例：札幌" size="10" /> <button type="button" id="geoBtn">検索して追加</button> <span id="geoView"></span></div>
           <p id="wxIndex" style="font-size:.95rem;font-weight:700;"></p>
           <p id="heatView" style="font-size:.95rem;font-weight:700;"></p>
+          <p class="wx-idx" id="kasaView"></p>
+          <p class="wx-idx" id="fukusoView"></p>
+          <p class="wx-idx" id="starView"></p>
+          <p class="asof" id="goldenView"></p>
+          <div id="sentakuHours" style="margin:4px 0;"></div>
           <div style="margin-top:4px;"><span style="font-weight:700;">🌙 月と潮（概算）</span><br /><canvas id="moonCanvas" width="72" height="72" style="width:72px;height:72px;"></canvas><div class="asof" id="moonView"></div></div>
+          <div style="margin-top:6px;"><span style="font-weight:700;">🌸 花粉・黄砂の週間傾向</span><br /><canvas id="pollenCanvas" width="330" height="110" style="width:100%;max-width:340px;background:var(--surface-2);border-radius:10px;"></canvas><div class="asof" id="pollenView">黄砂データを取得するとグラフを表示します。</div></div>
           <p class="asof" id="wxAsof"></p>
         </section>
 
@@ -718,6 +737,11 @@
             <h3>💡 今日の雑学（Wikipedia）</h3>
             <div class="playlog" id="triviaView">取得中…</div>
           </div>
+          <div class="playbox">
+            <h3>🚃 東上線 発車標ふう表示（ふじみ野駅）</h3>
+            <div class="tojo-board" id="tojoView">読み込み中…</div>
+            <div class="playlog">※ 気分を出すための演出です。実際の時刻表ではなく、目安パターンの表示です。正確な時刻は東武鉄道の公式情報で確認してください。</div>
+          </div>
         </section>
 
         <section class="card pet-sec" style="grid-column:1/-1;" aria-label="ダックスの部屋">
@@ -847,12 +871,50 @@
             <div class="mini-row"><input type="text" id="zipInput" placeholder="例：3560004" style="width:110px;" /> <button type="button" id="zipBtn">住所を出す</button> <span id="zipView"></span></div>
           </div>
           <div class="playbox">
+            <h3>✉️ 郵便料金の早見表（目安）</h3>
+            <table class="price-table">
+              <tr><th>種類</th><th>料金の目安</th></tr>
+              <tr><td>はがき</td><td>85円</td></tr>
+              <tr><td>封書・定形（25gまで／50gまで）</td><td>110円</td></tr>
+              <tr><td>定形外（50gまで）</td><td>140円</td></tr>
+              <tr><td>定形外（100gまで）</td><td>180円</td></tr>
+              <tr><td>定形外（150gまで）</td><td>270円</td></tr>
+              <tr><td>定形外（250gまで）</td><td>320円</td></tr>
+              <tr><td>定形外（500gまで）</td><td>510円</td></tr>
+              <tr><td>定形外（1kgまで）</td><td>750円</td></tr>
+              <tr><td>スマートレター</td><td>210円</td></tr>
+              <tr><td>レターパックライト</td><td>430円</td></tr>
+              <tr><td>レターパックプラス</td><td>600円</td></tr>
+              <tr><td>ミニレター（郵便書簡）</td><td>85円</td></tr>
+            </table>
+            <div class="playlog">※ 2024年10月改定時点の料金の目安です。速達・書留などは別料金。正確な料金は郵便局で確認してください。</div>
+          </div>
+          <div class="playbox">
+            <h3>📦 宅配便サイズ早見（目安）</h3>
+            <table class="price-table">
+              <tr><th>サイズ（3辺合計）</th><th>重さ</th><th>料金の目安（関東→関東）</th></tr>
+              <tr><td>60サイズ</td><td>2kgまで</td><td>約940円</td></tr>
+              <tr><td>80サイズ</td><td>5kgまで</td><td>約1,200円</td></tr>
+              <tr><td>100サイズ</td><td>10kgまで</td><td>約1,460円</td></tr>
+              <tr><td>120サイズ</td><td>15kgまで</td><td>約1,720円</td></tr>
+              <tr><td>140サイズ</td><td>20kgまで</td><td>約1,980円</td></tr>
+              <tr><td>160サイズ</td><td>25kgまで</td><td>約2,230円</td></tr>
+              <tr><td>コンパクト（専用箱）</td><td>—</td><td>約770円（箱代別）</td></tr>
+              <tr><td>ネコポス／ポスト投函便</td><td>1kgまで</td><td>約385円</td></tr>
+            </table>
+            <div class="playlog">※ 宅急便（ヤマト運輸）の目安です。送り先の地域や業者で大きく変わります。正確な料金は各社の料金表で確認してください。</div>
+          </div>
+          <div class="playbox">
             <h3>☎️ 緊急連絡先カード</h3>
             <div class="mini-row">名前 <input type="text" id="emgName" size="10" /> 電話 <input type="text" id="emgTel" size="13" /> <button type="button" id="emgBtn">表示</button></div><div class="playlog" id="emgView" style="font-size:19px;font-weight:700;"></div>
           </div>
           <div class="playbox">
             <h3>🏠 安否メモ・避難場所カード</h3>
             <div class="mini-row">避難場所 <input type="text" id="safePlace" size="14" /> 家族の集合場所 <input type="text" id="safeMeet" size="12" /> <button type="button" id="safeBtn">表示</button></div><div class="playlog" id="safeView" style="font-weight:700;"></div>
+          </div>
+          <div class="playbox">
+            <h3>🔐 戸締まり・防犯チェックリスト</h3>
+            <div id="lockList"></div><div class="playlog" id="lockView"></div>
           </div>
           <div class="playbox">
             <h3>💾 記録の書き出し</h3>
@@ -908,7 +970,7 @@
           </div>
           <div class="playbox">
             <h3>💡 光熱費メモ</h3>
-            <div class="mini-row"><select id="utilType"><option>電気</option><option>ガス</option><option>水道</option></select> <input type="month" id="utilMonth" /> <input type="number" id="utilAmt" placeholder="円" style="width:90px;" /> <button type="button" id="utilBtn">記録</button></div><div class="playlog" id="utilLog"></div>
+            <div class="mini-row"><select id="utilType"><option>電気</option><option>ガス</option><option>水道</option></select> <input type="month" id="utilMonth" /> <input type="number" id="utilAmt" placeholder="円" style="width:90px;" /> <button type="button" id="utilBtn">記録</button></div><div class="playlog" id="utilLog"></div><canvas id="utilCanvas" width="330" height="120" style="width:100%;max-width:340px;background:var(--surface-2);border-radius:10px;margin-top:6px;"></canvas><div class="playlog" id="utilGraphView">記録すると、種類ごとの金額グラフがここに出ます。</div>
           </div>
           <div class="playbox">
             <h3>✅ 習慣チェック</h3>
@@ -968,11 +1030,20 @@
           </div>
           <div class="playbox">
             <h3>🎒 備蓄チェックリスト</h3>
-            <div id="stockList"></div><div class="playlog" id="stockView"></div>
+            <div id="stockList"></div><div class="playlog" id="stockView"></div><div class="playlog" id="stockAlert" style="font-weight:700;color:#b3541e;"></div>
+          </div>
+          <div class="playbox">
+            <h3>🎍 年賀状・喪中の準備チェックリスト</h3>
+            <div id="nengaList"></div><div class="playlog" id="nengaView"></div>
+            <div class="playlog">喪中はがきは11月中の到着が目安。年賀状は12月25日までの投函で元日配達の目安です。</div>
           </div>
           <div class="playbox">
             <h3>🌱 種まきカレンダー</h3>
             <div class="playlog" id="seedCalView"></div>
+          </div>
+          <div class="playbox">
+            <h3>🌷 季節の花カレンダー</h3>
+            <div class="playlog" id="hanaView"></div>
           </div>
           <div class="playbox">
             <h3>🌘 月食・日食カレンダー</h3>
@@ -1136,6 +1207,26 @@
             <input id="msgInput" type="text" placeholder="大きく表示したい文字" style="font-size:16px;padding:8px;width:65%;" />
             <button type="button" id="msgBtn">特大表示</button>
           </div>
+          <div class="playbox">
+            <h3>🪞 鏡モード（フロントカメラ）</h3>
+            <div class="mini-row"><button type="button" id="mirrorBtn">鏡を開く</button> <button type="button" id="mirrorStopBtn">閉じる</button></div>
+            <video id="mirrorVideo" autoplay playsinline muted></video>
+            <div class="playlog" id="mirrorView">カメラの許可が必要です。映像はこの画面に表示するだけで、保存も送信もされません。</div>
+          </div>
+          <div class="playbox">
+            <h3>🔍 拡大鏡モード（文字を大きく読む）</h3>
+            <input id="meganeInput" type="text" placeholder="大きく読みたい文字を入力" style="font-size:16px;padding:8px;width:65%;" />
+            <button type="button" id="meganeBtn">大きく表示</button>
+            <button type="button" id="meganeAllBtn">ページ全体を大きく</button>
+            <div class="megane-big" id="meganeView" style="display:none;"></div>
+            <div class="playlog">メモや伝言の文字を特大で表示します。「ページ全体を大きく」は記録欄などの文字も拡大します（もう一度押すと戻ります）。</div>
+          </div>
+          <div class="playbox">
+            <h3>📢 声かけメモ（固定表示）</h3>
+            <input id="koeInput" type="text" placeholder="例：18時に迎えに行きます" style="font-size:16px;padding:8px;width:65%;" />
+            <button type="button" id="koeBtn">画面の上に固定表示</button>
+            <div class="playlog">家族への伝言を、画面の一番上に大きな文字で出し続けます。消すときはメモの「閉じる」ボタンです。</div>
+          </div>
         </section>
 
         <section class="card tool-sec" style="grid-column:1/-1;" aria-label="からだとタイマー">
@@ -1199,6 +1290,7 @@
       <div id="guideBubble"></div>
       <div id="emgOverlay"><h2 style="color:#fff;">⚠️ 緊急モード</h2><div id="emgInfo" style="font-size:19px;line-height:1.8;"></div><button type="button" id="emgLightBtn" style="font-size:19px;padding:14px;margin:8px 4px;">🔦 懐中電灯</button><button type="button" id="emgCloseBtn" style="font-size:19px;padding:14px;margin:8px 4px;">閉じる</button></div>
       <div id="msgOverlay"></div>
+      <div id="koeBar"><span id="koeText"></span><button type="button" id="koeClose">✕ 閉じる</button></div>
       <div id="lightOverlay"></div>
       <div id="flashOverlay"></div>
       <div id="starOverlay"><button type="button" id="starCloseBtn" style="position:absolute;right:12px;top:12px;font-size:16px;padding:10px 14px;border-radius:8px;">閉じる</button><div style="position:absolute;left:0;right:0;bottom:24px;text-align:center;color:#cfe3ff;font-size:18px;">おやすみなさい…🌙</div></div>
@@ -1651,7 +1743,7 @@
         /* 天気：4地点 */
         LOCATIONS.forEach(function (loc, li) {
           var url = "https://api.open-meteo.com/v1/forecast?latitude=" + loc.lat + "&longitude=" + loc.lon +
-            "&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&hourly=temperature_2m,weather_code,precipitation_probability&timezone=Asia%2FTokyo&forecast_days=7";
+            "&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&hourly=temperature_2m,weather_code,precipitation_probability,cloud_cover&timezone=Asia%2FTokyo&forecast_days=7";
           getJSON2(url, function (j) {
             try {
               loc.now = { temp: j.current.temperature_2m, code: j.current.weather_code };
@@ -1677,7 +1769,7 @@
                   if (j.hourly.time[hi2].substring(0, 10) === j.daily.time[0] && parseInt(j.hourly.time[hi2].substring(11, 13), 10) === hIdx) { hIdx = hi2; break; }
                 }
                 for (var hk = hIdx; hk < Math.min(hIdx + 12, j.hourly.time.length); hk++) {
-                  hours.push({ h: j.hourly.time[hk].substring(11, 16), t: j.hourly.temperature_2m[hk], c: j.hourly.weather_code[hk], p: (j.hourly.precipitation_probability && j.hourly.precipitation_probability[hk] != null) ? j.hourly.precipitation_probability[hk] : 0 });
+                  hours.push({ h: j.hourly.time[hk].substring(11, 16), t: j.hourly.temperature_2m[hk], c: j.hourly.weather_code[hk], p: (j.hourly.precipitation_probability && j.hourly.precipitation_probability[hk] != null) ? j.hourly.precipitation_probability[hk] : 0, cc: (j.hourly.cloud_cover && j.hourly.cloud_cover[hk] != null) ? j.hourly.cloud_cover[hk] : null });
                 }
                 HOURLY[li] = hours;
               }
@@ -3854,6 +3946,77 @@ e.preventDefault();
 window.open(el("drawCv").toDataURL("image/png"), "_blank");
 });
 el("drawLog").parentNode.appendChild(saveLink);
+/* ============ 第3波：チェックリスト追加 ============ */
+checklist("nengaList", "nengaView", ["年内に喪中の連絡がないか確認", "送る相手のリストを作る", "年賀状・喪中はがきを買う", "写真やイラストを決める", "あいさつ文を書く・印刷する", "宛名を書く", "12月25日までに投函", "喪中はがきは11月中に出す", "返信用を少し多めに用意"], "年賀状の準備OK🎉");
+checklist("lockList", "lockView", ["玄関の鍵", "1階の窓の鍵", "ガスの元栓", "コンロ・ストーブの消し忘れ", "水道の蛇口", "エアコン・扇風機を切る", "洗濯機の水栓", "郵便受けの確認"], "戸締まりOK🎉 安心してお出かけを");
+/* ============ 第3波：備蓄の賞味期限アラート（賞味期限メモと連動） ============ */
+var stockExpList = [];
+function renderStockAlert() {
+var box = el("stockAlert");
+if (!box) return;
+var today = new Date(new Date().toDateString());
+var msgs = [];
+stockExpList.forEach(function (it) {
+var days = Math.round((new Date(it.date + "T00:00:00") - today) / 86400000);
+if (days < 0) msgs.push("⚠️ 期限切れ：" + it.name + "（" + it.date + "）");
+else if (days <= 30) msgs.push("🔔 あと" + days + "日：" + it.name + "（" + it.date + "）");
+});
+box.textContent = msgs.length ? "備蓄の期限チェック：" + msgs.join(" ／ ") : (stockExpList.length ? "備蓄の期限チェック：30日以内のものはありません👍" : "");
+}
+el("expBtn").addEventListener("click", function () {
+var v = el("expDate").value, name = el("expName").value;
+if (!v || !name) return;
+stockExpList.push({ name: name, date: v });
+renderStockAlert();
+});
+/* ============ 第3波：誕生日 当日バナー（家族の誕生日リストと連動） ============ */
+function renderBdayBanner() {
+var box = el("bdayBanner");
+if (!box) return;
+var todayNames = [];
+famList.forEach(function (f) { if (f.next === 0) todayNames.push(f.name); });
+box.textContent = todayNames.length ? "🎂🎉 今日は " + todayNames.join("さん・") + "さんの誕生日です！お祝いを忘れずに 🎉" : "";
+}
+el("famBtn").addEventListener("click", function () { setTimeout(renderBdayBanner, 60); });
+setInterval(renderBdayBanner, 60000);
+renderBdayBanner();
+/* ============ 第3波：光熱費グラフ ============ */
+var utilRecs = [];
+function drawUtilGraph() {
+var cv = el("utilCanvas");
+if (!cv || !cv.getContext) return;
+var ctx = cv.getContext("2d");
+ctx.clearRect(0, 0, 330, 120);
+var types = ["電気", "ガス", "水道"], colors = { "電気": "#e9a13b", "ガス": "#4a90d9", "水道": "#43a58a" };
+var maxV = 0;
+utilRecs.forEach(function (r) { if (r.amt > maxV) maxV = r.amt; });
+if (!utilRecs.length || maxV <= 0) { el("utilGraphView").textContent = "記録すると、種類ごとの金額グラフがここに出ます。"; return; }
+types.forEach(function (tp, ti) {
+var rows = utilRecs.filter(function (r) { return r.type === tp; });
+rows.sort(function (a, b) { return a.month < b.month ? -1 : 1; });
+rows = rows.slice(-6);
+rows.forEach(function (r, i) {
+var h = Math.max(4, Math.round(r.amt / maxV * 78));
+var x = 16 + ti * 108 + i * 17, y = 96 - h;
+ctx.fillStyle = colors[tp];
+ctx.fillRect(x, y, 13, h);
+ctx.fillStyle = "#666";
+ctx.font = "9px sans-serif";
+ctx.fillText(r.month ? r.month.substring(5) : "", x - 1, 108);
+});
+ctx.fillStyle = colors[tp];
+ctx.font = "11px sans-serif";
+ctx.fillText(tp, 16 + ti * 108, 14);
+});
+var last = utilRecs[utilRecs.length - 1];
+el("utilGraphView").textContent = "📊 光熱費グラフ（種類ごとに新しい順6件まで・最新：" + last.type + " " + (last.month || "") + " " + last.amt.toLocaleString() + "円）";
+}
+el("utilBtn").addEventListener("click", function () {
+var amt = parseFloat(el("utilAmt").value);
+if (!amt) return;
+utilRecs.push({ type: el("utilType").value, month: el("utilMonth").value || "", amt: amt });
+drawUtilGraph();
+});
 })();
 
 
@@ -3866,7 +4029,7 @@ el("drawLog").parentNode.appendChild(saveLink);
         el("wordView").textContent = "📖 今日の四字熟語・慣用句：「" + idi[0] + "」（" + idi[1] + "）… " + idi[2];
         el("kanjiView").textContent = "🖌 今日の漢字：「" + kan[0] + "」（" + kan[1] + "）… " + kan[2];
         /* 世界の窓 */
-        var CITIES = [["ニューヨーク", 40.71, -74.0, "America/New_York"], ["ロンドン", 51.5, -0.12, "Europe/London"], ["パリ", 48.85, 2.35, "Europe/Paris"], ["シドニー", -33.86, 151.2, "Australia/Sydney"], ["ホノルル", 21.3, -157.8, "Pacific/Honolulu"], ["ソウル", 37.56, 126.97, "Asia/Seoul"], ["バンコク", 13.75, 100.5, "Asia/Bangkok"], ["ロサンゼルス", 34.05, -118.24, "America/Los_Angeles"], ["レイキャビク", 64.14, -21.94, "Atlantic/Reykjavik"], ["カイロ", 30.04, 31.23, "Africa/Cairo"]];
+        var CITIES = [["ニューヨーク", 40.71, -74.0, "America/New_York"], ["ロンドン", 51.5, -0.12, "Europe/London"], ["パリ", 48.85, 2.35, "Europe/Paris"], ["シドニー", -33.86, 151.2, "Australia/Sydney"], ["ホノルル", 21.3, -157.8, "Pacific/Honolulu"], ["ソウル", 37.56, 126.97, "Asia/Seoul"], ["バンコク", 13.75, 100.5, "Asia/Bangkok"], ["ロサンゼルス", 34.05, -118.24, "America/Los_Angeles"], ["レイキャビク", 64.14, -21.94, "Atlantic/Reykjavik"], ["カイロ", 30.04, 31.23, "Africa/Cairo"], ["ベルリン", 52.52, 13.4, "Europe/Berlin"], ["ローマ", 41.9, 12.5, "Europe/Rome"], ["マドリード", 40.42, -3.7, "Europe/Madrid"], ["ウィーン", 48.2, 16.37, "Europe/Vienna"], ["ストックホルム", 59.33, 18.07, "Europe/Stockholm"], ["バンクーバー", 49.28, -123.12, "America/Vancouver"], ["トロント", 43.65, -79.38, "America/Toronto"], ["シンガポール", 1.35, 103.82, "Asia/Singapore"], ["クアラルンプール", 3.14, 101.69, "Asia/Kuala_Lumpur"], ["オークランド", -36.85, 174.76, "Pacific/Auckland"]];
         el("worldBtn").addEventListener("click", function () {
           var c = CITIES[Math.floor(Math.random() * CITIES.length)];
           el("worldView").textContent = c[0] + "の天気を取得中…";
@@ -4123,6 +4286,238 @@ el("drawLog").parentNode.appendChild(saveLink);
           el("elecView").textContent = "🔌 1ヶ月の目安：約 " + Math.round(yen).toLocaleString() + "円（" + (w / 1000 * h * 30).toFixed(1) + "kWh）";
         });
       })();
+
+      /* ============ 第3波：ラッキーカラー＆アイテム（日替わり） ============ */
+      (function () {
+        var nowD = new Date();
+        var seed = nowD.getFullYear() * 10000 + (nowD.getMonth() + 1) * 100 + nowD.getDate();
+        seed = (seed * 1103515245 + 12345) % 2147483648;
+        var colors = ["赤", "青", "緑", "黄色", "ピンク", "白", "紫", "オレンジ", "水色", "金色"];
+        var items = ["ハンカチ", "鍵", "コイン", "腕時計", "傘", "本のしおり", "温かいお茶", "丸いシール", "お気に入りの靴下", "小さな鏡"];
+        el("luckyView").textContent = "🍀 今日のラッキーカラー：" + colors[seed % colors.length] + " ／ ラッキーアイテム：" + items[(seed >> 4) % items.length];
+      })();
+
+      /* ============ 第3波：季節の花カレンダー ============ */
+      (function () {
+        var FLOWERS = [
+          ["ロウバイ・水仙", "1月〜2月", "川越・喜多院や越生のロウバイ園が見どころ"],
+          ["梅", "2月〜3月", "越生梅林（関東三大梅林のひとつ）が近場の名所"],
+          ["桜", "3月下旬〜4月上旬", "川越・新河岸川沿いと氷川神社裏の桜並木"],
+          ["菜の花・チューリップ", "4月", "鴻巣・吹上のポピー畑や国営武蔵丘陵森林公園"],
+          ["バラ・あやめ", "5月", "川越・伊佐沼公園の花しょうぶ、与野公園のバラ"],
+          ["あじさい", "6月", "幸手・権現堂公園のあじさいまつり"],
+          ["ひまわり・蓮", "7月〜8月", "行田・古代蓮の里、所沢のひまわり畑"],
+          ["コスモス（早咲き）・彼岸花の芽", "8月〜9月", "鴻巣・吹上コスモス畑は秋本番へ準備中"],
+          ["彼岸花", "9月中旬〜下旬", "日高・巾着田の曼珠沙華（500万本）"],
+          ["コスモス・金木犀", "10月", "鴻巣・吹上のコスモス、街中の金木犀の香り"],
+          ["紅葉", "11月", "新座・平林寺の紅葉、川越・喜多院"],
+          ["冬桜・山茶花", "12月", "城峯公園（神川町）の冬桜と花桃"]
+        ];
+        var m = new Date().getMonth();
+        var html = "🌷 今月（" + (m + 1) + "月）の花：" + FLOWERS[m][0] + "（見頃：" + FLOWERS[m][1] + "）<br />　" + FLOWERS[m][2] + "<br />";
+        FLOWERS.forEach(function (f, i) { html += (i + 1) + "月：" + f[0] + "（" + f[1] + "）<br />"; });
+        el("hanaView").innerHTML = html + "※ 見頃は年によって前後します。近場の名所メモは目安です。";
+      })();
+
+      /* ============ 第3波：東上線 発車標ふう表示 ============ */
+      (function () {
+        var UP_MIN = [2, 12, 22, 32, 42, 52], UP_KIND = ["快速急行", "急行", "準急", "普通", "急行", "準急"];
+        var DN_MIN = [5, 17, 29, 41, 53], DN_KIND = ["普通", "準急", "普通", "急行", "普通"];
+        function nextTrains(mins, kinds, dest, now) {
+          var out = [], h = now.getHours(), m = now.getMinutes();
+          var base = h * 60 + m;
+          for (var add = 0; add < 2 && out.length < 3; add++) {
+            for (var i = 0; i < mins.length && out.length < 3; i++) {
+              var t = (h + add) * 60 + mins[i];
+              if (add === 0 && t < base) continue;
+              var hh = Math.floor(t / 60) % 24, mm = t % 60;
+              out.push({ time: (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm, kind: kinds[i % kinds.length], dest: dest, wait: t - base });
+            }
+          }
+          return out;
+        }
+        function renderTojo() {
+          var now = new Date();
+          var up = nextTrains(UP_MIN, UP_KIND, "池袋", now);
+          var dn = nextTrains(DN_MIN, DN_KIND, "川越・小川町", now);
+          var s = "ふじみ野駅 発車標（ふう）\n";
+          up.forEach(function (t) { s += "上り " + t.time + " " + t.kind + " <span class='dest'>" + t.dest + "ゆき</span>（あと" + t.wait + "分）\n"; });
+          dn.forEach(function (t) { s += "下り " + t.time + " " + t.kind + " <span class='dest'>" + t.dest + "ゆき</span>（あと" + t.wait + "分）\n"; });
+          el("tojoView").innerHTML = s.replace(/\n/g, "<br />");
+        }
+        renderTojo();
+        setInterval(renderTojo, 30000);
+      })();
+
+      /* ============ 第3波：鏡モード ============ */
+      (function () {
+        var stream = null;
+        function stopMirror() {
+          if (stream) { try { stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {} stream = null; }
+          el("mirrorVideo").style.display = "none";
+        }
+        el("mirrorBtn").addEventListener("click", function () {
+          try {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { el("mirrorView").textContent = "この環境ではカメラが使えませんでした。"; return; }
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false }).then(function (st) {
+              stream = st;
+              var v = el("mirrorVideo");
+              v.srcObject = st;
+              v.style.display = "block";
+              try { var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+              el("mirrorView").textContent = "鏡モード中です。映像はこの画面だけの表示で、保存も送信もされません。";
+            }, function () { el("mirrorView").textContent = "カメラの許可が得られませんでした。設定でカメラを許可してください。"; });
+          } catch (e) { el("mirrorView").textContent = "この環境ではカメラが使えませんでした。"; }
+        });
+        el("mirrorStopBtn").addEventListener("click", function () { stopMirror(); el("mirrorView").textContent = "鏡を閉じました。"; });
+      })();
+
+      /* ============ 第3波：拡大鏡モード・声かけメモ ============ */
+      el("meganeBtn").addEventListener("click", function () {
+        var v = el("meganeInput").value;
+        if (!v) return;
+        var box = el("meganeView");
+        box.textContent = v;
+        box.style.display = "block";
+      });
+      el("meganeAllBtn").addEventListener("click", function () {
+        var cn = document.body.className;
+        if (cn.indexOf("meganeall") >= 0) { document.body.className = cn.replace(/\s?meganeall/g, ""); this.textContent = "ページ全体を大きく"; }
+        else { document.body.className = cn + " meganeall"; this.textContent = "全体拡大をやめる"; }
+      });
+      el("koeBtn").addEventListener("click", function () {
+        var v = el("koeInput").value;
+        if (!v) return;
+        el("koeText").textContent = "📢 " + v;
+        el("koeBar").style.display = "block";
+      });
+      el("koeClose").addEventListener("click", function () { el("koeBar").style.display = "none"; });
+
+      /* ============ 第3波：指数いろいろ（天気データから算出） ============ */
+      var lastWx3Ver = "";
+      function addMin(hhmm, add) {
+        var p = hhmm.split(":");
+        var t = parseInt(p[0], 10) * 60 + parseInt(p[1], 10) + add;
+        t = ((t % 1440) + 1440) % 1440;
+        var h = Math.floor(t / 60), m = t % 60;
+        return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+      }
+      function renderWx3() {
+        var loc = LOCATIONS[curLoc];
+        if (!loc || !loc.days || !loc.days[0]) return;
+        var hours = HOURLY[curLoc] || [];
+        var ver = curLoc + "|" + hours.length + "|" + loc.days[0].pop + "|" + (loc.sunrise || "") + "|" + SNAPSHOT_AT;
+        if (ver === lastWx3Ver) return;
+        lastWx3Ver = ver;
+        var d = loc.days[0];
+        /* 傘指数 */
+        var maxPop = d.pop;
+        hours.forEach(function (hh) { if (hh.p > maxPop) maxPop = hh.p; });
+        var kasa = maxPop >= 70 ? "☔ 傘指数：傘は必須です（降水確率 最大" + maxPop + "%）"
+          : maxPop >= 40 ? "🌂 傘指数：折りたたみ傘があると安心（降水確率 最大" + maxPop + "%）"
+          : maxPop >= 20 ? "🌤 傘指数：念のため小さい傘を（降水確率 最大" + maxPop + "%）"
+          : "☀️ 傘指数：傘はいらなそうです（降水確率 最大" + maxPop + "%）";
+        el("kasaView").textContent = kasa;
+        /* 服装指数 */
+        var base = d.hi >= 28 ? "半袖＋薄手の羽織り" : d.hi >= 23 ? "長袖シャツ＋軽い羽織り" : d.hi >= 18 ? "長袖＋ジャケット" : d.hi >= 12 ? "セーター＋コート" : d.hi >= 7 ? "厚手コート＋マフラー" : "真冬装備（コート＋手袋＋マフラー）";
+        var diff = d.hi - d.lo;
+        el("fukusoView").textContent = "👕 服装指数：" + base + "（最高" + Math.round(d.hi) + "℃／最低" + Math.round(d.lo) + "℃）" + (diff >= 10 ? "。気温差が大きいので、朝晩は1枚多めに。" : "");
+        /* 星空指数（今夜18時以降の雲量） */
+        var ccSum = 0, ccN = 0, codeClear = 0, codeN = 0;
+        hours.forEach(function (hh) {
+          var hr = parseInt(hh.h.substring(0, 2), 10);
+          if (hr >= 18) {
+            if (hh.cc != null) { ccSum += hh.cc; ccN++; }
+            if (hh.c <= 1) codeClear++;
+            codeN++;
+          }
+        });
+        var starTxt;
+        if (ccN > 0) {
+          var avg = ccSum / ccN;
+          starTxt = avg <= 15 ? "★★★★★ とても見えそう" : avg <= 35 ? "★★★★☆ よく見えそう" : avg <= 55 ? "★★★☆☆ 雲の切れ間に" : avg <= 75 ? "★★☆☆☆ あまり期待できない" : "★☆☆☆☆ 雲が多そう";
+          el("starView").textContent = "🌟 星空指数（今夜）：" + starTxt + "（雲量の平均 約" + Math.round(avg) + "%から算出）";
+        } else if (codeN > 0) {
+          el("starView").textContent = "🌟 星空指数（今夜）：" + (codeClear >= codeN - 1 ? "★★★★☆ よく見えそう" : codeClear > 0 ? "★★★☆☆ 雲の切れ間に" : "★★☆☆☆ あまり期待できない") + "（今夜の天気から算出）";
+        }
+        /* ゴールデンアワー */
+        if (loc.sunrise && loc.sunset) {
+          el("goldenView").textContent = "📸 ゴールデンアワー（写真向け）：朝 " + loc.sunrise + "〜" + addMin(loc.sunrise, 60) + " ／ 夕 " + addMin(loc.sunset, -60) + "〜" + loc.sunset + "（日の出・日の入り前後のやわらかい光の時間帯）";
+        }
+        /* 洗濯指数（時間帯別） */
+        var box = el("sentakuHours");
+        if (hours.length) {
+          var html = "<span style='font-weight:700;'>👕 洗濯指数（時間帯別）</span><br />", best = "";
+          hours.forEach(function (hh) {
+            var mark = hh.p >= 50 ? "×" : hh.p >= 30 ? "△" : (hh.t >= 12 ? "◎" : "○");
+            if (mark === "◎" && !best) best = hh.h;
+            html += "<span class='sentaku-cell'>" + hh.h + "<br />" + mark + "<br />" + hh.p + "%</span>";
+          });
+          html += "<br /><span class='asof'>" + (best ? "干すなら " + best + " ごろからがおすすめ（◎の時間帯）。" : "今日は部屋干し寄りの一日です。") + " 降水確率からの目安です。</span>";
+          box.innerHTML = html;
+        }
+      }
+      document.getElementById("locTabs").addEventListener("click", function () { setTimeout(renderWx3, 120); });
+      setInterval(renderWx3, 6000);
+      renderWx3();
+
+      /* ============ 第3波：花粉・黄砂の週間傾向 ============ */
+      var DUSTWEEK = null;
+      function pollenSeasonText() {
+        var now = new Date(), m = now.getMonth() + 1, d = now.getDate();
+        if ((m === 2 && d >= 10) || m === 3) return "スギ・ヒノキ花粉：多い時期（季節からの概算）";
+        if (m === 4) return "ヒノキ花粉：やや多い時期（季節からの概算）";
+        if (m === 5) return "イネ科花粉：少し出る時期（季節からの概算）";
+        if (m === 9) return "ブタクサ花粉：やや多い時期（季節からの概算）";
+        if (m === 10) return "ブタクサ花粉：少し出る時期（季節からの概算）";
+        return "花粉：少ない時期（季節からの概算）";
+      }
+      function drawPollen() {
+        var cv = el("pollenCanvas");
+        if (!cv || !cv.getContext || !DUSTWEEK || !DUSTWEEK.length) return;
+        var ctx = cv.getContext("2d");
+        ctx.clearRect(0, 0, 330, 110);
+        var maxV = 0;
+        DUSTWEEK.forEach(function (r) { if (r.v > maxV) maxV = r.v; });
+        if (maxV <= 0) maxV = 1;
+        DUSTWEEK.forEach(function (r, i) {
+          var h = Math.max(2, Math.round(r.v / maxV * 72));
+          var x = 14 + i * 45, y = 88 - h;
+          ctx.fillStyle = r.v >= 100 ? "#c0392b" : r.v >= 50 ? "#e9a13b" : "#d9b23a";
+          ctx.fillRect(x, y, 30, h);
+          ctx.fillStyle = "#666";
+          ctx.font = "10px sans-serif";
+          ctx.fillText(r.label, x + 2, 102);
+          ctx.fillText(Math.round(r.v) + "", x + 4, y - 3);
+        });
+        ctx.fillStyle = "#666";
+        ctx.font = "10px sans-serif";
+        ctx.fillText("黄砂 µg/m³（1日の最大）", 14, 12);
+        var today = DUSTWEEK[0];
+        el("pollenView").textContent = "黄砂（Open-Meteo実データ）：今日の最大 " + Math.round(today.v) + "µg/m³ ／ " + pollenSeasonText() + "。※ 花粉は飛散データではなく季節からの概算です。";
+      }
+      function fetchPollen() {
+        var loc = LOCATIONS[curLoc];
+        if (!loc) return;
+        getJSON2("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + loc.lat + "&longitude=" + loc.lon + "&hourly=dust&forecast_days=7&timezone=Asia%2FTokyo", function (j) {
+          try {
+            var byDay = {}, order = [];
+            for (var i = 0; i < j.hourly.time.length; i++) {
+              var day = j.hourly.time[i].substring(0, 10);
+              if (byDay[day] == null) { byDay[day] = 0; order.push(day); }
+              if ((j.hourly.dust[i] || 0) > byDay[day]) byDay[day] = j.hourly.dust[i] || 0;
+            }
+            DUSTWEEK = order.slice(0, 7).map(function (day) {
+              var dt = new Date(day + "T00:00:00");
+              return { label: (dt.getMonth() + 1) + "/" + dt.getDate() + "(" + DOW[dt.getDay()] + ")", v: byDay[day] };
+            });
+            drawPollen();
+          } catch (e) {}
+        }, function () {});
+      }
+      document.getElementById("refreshBtn").addEventListener("click", function () { setTimeout(fetchPollen, 900); });
+      document.getElementById("locTabs").addEventListener("click", function () { setTimeout(fetchPollen, 200); });
+      fetchPollen();
 
 </script>
   </body>
