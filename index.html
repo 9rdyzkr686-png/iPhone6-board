@@ -396,7 +396,6 @@
           <p class="asof" id="wxWeek"></p>
           <p class="asof" id="wxWalkWeek"></p>
           <p class="asof" id="wxWave"></p>
-          <div id="radarBox" style="margin-top:6px;"><div style="font-weight:700;">☔ 雨雲レーダー（ふじみ野市周辺）</div><div style="position:relative;width:256px;height:256px;border-radius:10px;overflow:hidden;background:#dfe9f2;"><img id="radarBase" alt="" style="position:absolute;left:0;top:0;width:256px;height:256px;" /><img id="radarImg" alt="雨雲レーダー" style="position:absolute;left:0;top:0;width:256px;height:256px;" /><span style="position:absolute;left:148px;top:190px;font-size:16px;">📍</span></div><div class="asof" id="radarAt"></div></div>
           <div class="mini-row">📍 地点を追加：<input type="text" id="geoInput" placeholder="例：札幌" size="10" /> <button type="button" id="geoBtn">検索して追加</button> <span id="geoView"></span></div>
           <p id="wxIndex" style="font-size:.95rem;font-weight:700;"></p>
           <p class="asof" id="wxAsof"></p>
@@ -2870,40 +2869,6 @@
         el("refreshBtn").addEventListener("click", function () { setTimeout(fetchWarnings, 800); setTimeout(fetchNetAll, 800); });
         el("locTabs").addEventListener("click", function () { setTimeout(fetchWarnings, 100); });
 
-        /* レーダー */
-        var radarFrames = [], radarIdx = 0, radarTimer = null;
-        function fetchRadar() {
-          getJSON2("https://api.rainviewer.com/public/weather-maps.json", function (j) {
-            try {
-              var past = j.radar.past;
-              var z = 7, lat = 35.8795, lon = 139.5197;
-              el("radarBase").src = "https://tile.openstreetmap.org/" + z + "/" + Math.floor((lon + 180) / 360 * Math.pow(2, z)) + "/" + Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, z)) + ".png";
-              var x = Math.floor((lon + 180) / 360 * Math.pow(2, z));
-              var latR = lat * Math.PI / 180;
-              var y = Math.floor((1 - Math.log(Math.tan(latR) + 1 / Math.cos(latR)) / Math.PI) / 2 * Math.pow(2, z));
-              radarFrames = [];
-              var start = Math.max(0, past.length - 10);
-              for (var i = start; i < past.length; i++) {
-                radarFrames.push({ url: j.host + past[i].path + "/256/" + z + "/" + x + "/" + y + "/2/1_1.png", time: past[i].time });
-                var pre = new Image();
-                pre.src = radarFrames[radarFrames.length - 1].url;
-              }
-              var img = el("radarImg");
-              img.onerror = function () { el("radarAt").textContent = "レーダー画像を読み込めませんでした（通信環境をご確認ください）"; };
-              if (radarTimer) clearInterval(radarTimer);
-              radarIdx = 0;
-              function showFrame() {
-                if (!radarFrames.length) return;
-                var f = radarFrames[radarIdx % radarFrames.length];
-                img.src = f.url;
-                el("radarAt").textContent = "レーダー：" + new Date(f.time * 1000).toLocaleTimeString("ja-JP") + " 時点（アニメーション中）";
-                radarIdx++;
-              }
-              showFrame();
-              radarTimer = setInterval(showFrame, 800);
-            } catch (e) { el("radarAt").textContent = "レーダーを取得できませんでした"; }
-          }, function () { el("radarAt").textContent = "レーダーを取得できませんでした（通信エラー）"; });
-        }
         /* 波・黄砂 */
         var DUST = {};
         function fetchSea() {
@@ -2946,7 +2911,7 @@
         }
         /* 相場・ISS・雑学 */
         function fetchNetAll() {
-          fetchRadar(); fetchSea();
+          fetchSea();
           loadNewsList("newsLocal", '"ふじみ野市" OR "川越市"');
           loadNewsList("newsSports", "スポーツ");
           loadNewsList("newsGei", "芸能");
