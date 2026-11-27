@@ -904,11 +904,11 @@
           </div>
           <div class="playbox">
             <h3>⏳ タイムカプセルQR</h3>
-            <input id="capInput" type="text" placeholder="未来への手紙" style="font-size:16px;padding:8px;width:60%;" /> <input type="date" id="capDate" /> <button type="button" id="capBtn">封印QRを作る</button><img id="capImg" alt="封印QR" style="display:none;width:200px;height:200px;margin-top:6px;" /><div class="playlog" id="capCode" style="word-break:break-all;"></div><input id="capOpenInput" type="text" placeholder="開封コードを貼る" style="font-size:14px;padding:8px;width:60%;" /> <button type="button" id="capOpenBtn">開封する</button><div class="playlog" id="capOpenView"></div>
+            <input id="capInput" type="text" placeholder="未来への手紙" style="font-size:16px;padding:8px;width:60%;" /> <input type="date" id="capDate" /> <button type="button" id="capBtn">封印QRを作る</button><img id="capImg" alt="封印QR" style="display:none;width:200px;height:200px;margin-top:6px;" /><div class="playlog" id="capCode" style="word-break:break-all;"></div><input id="capOpenInput" type="text" placeholder="開封コードを貼る" style="font-size:16px;padding:8px;width:60%;" /> <button type="button" id="capOpenBtn">開封する</button><div class="playlog" id="capOpenView"></div>
           </div>
           <div class="playbox">
             <h3>🔐 犬語暗号メーカー</h3>
-            <input id="cipherInput" type="text" placeholder="秘密の文章" style="font-size:16px;padding:8px;width:60%;" /> <button type="button" id="cipherBtn">暗号化</button><div class="playlog" id="cipherView" style="word-break:break-all;"></div><input id="cipherDecInput" type="text" placeholder="暗号を貼る" style="font-size:14px;padding:8px;width:60%;" /> <button type="button" id="cipherDecBtn">解読</button><div class="playlog" id="cipherDecView"></div>
+            <input id="cipherInput" type="text" placeholder="秘密の文章" style="font-size:16px;padding:8px;width:60%;" /> <button type="button" id="cipherBtn">暗号化</button><div class="playlog" id="cipherView" style="word-break:break-all;"></div><input id="cipherDecInput" type="text" placeholder="暗号を貼る" style="font-size:16px;padding:8px;width:60%;" /> <button type="button" id="cipherDecBtn">解読</button><div class="playlog" id="cipherDecView"></div>
           </div>
           <div class="playbox">
             <h3>❓ 今日の質問（ダックスから）</h3>
@@ -1402,6 +1402,159 @@
           </div>
         </section>
         <!-- BOARD-B END -->
+<!-- BOARD-W1 START -->
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="関東の交通ニュース">
+          <h2>関東の交通ニュース <span class="tag">見出し</span></h2>
+          <div class="playbox">
+            <h3>🚗 交通事故・通行止め（関東）</h3>
+            <ul class="news-list" id="bw1NewsTraffic"><li>取得中…</li></ul>
+            <p class="asof" id="bw1AsofTraffic"></p>
+          </div>
+          <p style="font-size:13px;color:var(--ink-soft);margin:0;">見出しだけの一覧です。リアルタイムの交通規制そのものではありません。最新の状況は各リンク先や公式の道路交通情報でご確認ください。</p>
+        </section>
+
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="鉄道運行情報ニュース">
+          <h2>鉄道運行情報 <span class="tag">見出し</span></h2>
+          <div class="playbox">
+            <h3>🚃 東武東上線</h3>
+            <ul class="news-list" id="bw1NewsTobu"><li>取得中…</li></ul>
+            <p class="asof" id="bw1AsofTobu"></p>
+          </div>
+          <div class="playbox">
+            <h3>🚃 西武線</h3>
+            <ul class="news-list" id="bw1NewsSeibu"><li>取得中…</li></ul>
+            <p class="asof" id="bw1AsofSeibu"></p>
+          </div>
+          <div class="playbox">
+            <h3>🚃 JR川越線</h3>
+            <ul class="news-list" id="bw1NewsKawagoe"><li>取得中…</li></ul>
+            <p class="asof" id="bw1AsofKawagoe"></p>
+          </div>
+          <p style="font-size:13px;color:var(--ink-soft);margin:0;">運行に関するニュースの見出しを集めたものです。実際の運行状況は各鉄道会社の公式発表でご確認ください。</p>
+        </section>
+
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="停電ニュース（関東）">
+          <h2>停電ニュース（関東） <span class="tag">見出し</span></h2>
+          <div class="playbox">
+            <h3>🔌 停電に関する見出し</h3>
+            <ul class="news-list" id="bw1NewsPower"><li>取得中…</li></ul>
+            <p class="asof" id="bw1AsofPower"></p>
+          </div>
+          <p style="font-size:13px;color:var(--ink-soft);margin:0;">現在の停電戸数そのものではなく、停電に関するニュースの見出しです。実際の停電情報は東京電力の公式ページでご確認ください。</p>
+        </section>
+
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="埼玉のニュース（NHK関連見出し）">
+          <h2>埼玉のニュース（NHK関連見出し） <span class="tag">見出し検索</span></h2>
+          <div class="playbox">
+            <h3>📺 NHK関連の埼玉見出し</h3>
+            <ul class="news-list" id="bw1NewsNhk"><li>取得中…</li></ul>
+            <p class="asof" id="bw1AsofNhk"></p>
+          </div>
+          <p style="font-size:13px;color:var(--ink-soft);margin:0;">NHKの公式フィードではなく、「NHK 埼玉」で検索した見出しの一覧です。</p>
+        </section>
+      <!-- BOARD-W1 END -->
+<!-- BOARD-W2 START -->
+        <section class="card pet-sec" style="grid-column:1/-1;" aria-label="バーチャルダックスの体重">
+          <h2>⚖️ バーチャルダックスの体重 <span class="tag">追加・育成</span></h2>
+          <p style="font-size:15px;margin:6px 0 10px;">このボードで育てているダックスの「今のレベル」から、体重の目安を計算します（カニンヘンダックスフントの成長の目安をもとにした推定です。実際の体重ではありません）。</p>
+          <button type="button" id="bw2WeightBtn" style="min-height:48px;padding:10px 18px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">今の体重を計算する</button>
+          <div id="bw2WeightView" style="font-size:17px;line-height:1.6;margin-top:10px;white-space:pre-wrap;">ボタンを押すと、今のレベルでの推定体重を表示します。</div>
+        </section>
+
+        <section class="card play-sec" style="grid-column:1/-1;" aria-label="おさんぽコースガチャ">
+          <h2>🚶 おさんぽコースガチャ <span class="tag">追加・あそび</span></h2>
+          <p style="font-size:15px;margin:6px 0 10px;">ふじみ野市・川越のおさんぽコースをランダムで1つおすすめします。距離は目安です。</p>
+          <button type="button" id="bw2WalkBtn" style="min-height:48px;padding:10px 18px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">🎰 コースを引く</button>
+          <div id="bw2WalkView" style="font-size:17px;line-height:1.6;margin-top:10px;white-space:pre-wrap;">まだ引いていません。</div>
+        </section>
+
+        <section class="card play-sec" style="grid-column:1/-1;" aria-label="川柳ジェネレーター">
+          <h2>✍️ 川柳ジェネレーター <span class="tag">追加・あそび</span></h2>
+          <p style="font-size:15px;margin:6px 0 10px;">五・七・五の句をランダムに組み合わせて川柳を作ります。</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0;">
+            <label style="font-size:16px;">テーマ：
+              <select id="bw2SenryuTheme" style="font-size:16px;min-height:48px;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">
+                <option value="dax" selected>ダックス</option>
+                <option value="daily">日常</option>
+                <option value="season">季節</option>
+              </select>
+            </label>
+            <button type="button" id="bw2SenryuBtn" style="min-height:48px;padding:10px 18px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">川柳を作る</button>
+            <button type="button" id="bw2SenryuCopy" style="min-height:48px;padding:10px 18px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">コピー</button>
+          </div>
+          <div id="bw2SenryuView" style="font-size:20px;font-weight:700;line-height:1.7;white-space:pre-wrap;">まだ作っていません。</div>
+          <div id="bw2SenryuMsg" style="font-size:14px;color:var(--ink-soft);margin-top:6px;"></div>
+        </section>
+
+        <section class="card play-sec" style="grid-column:1/-1;" aria-label="ゴミ分別クイズ">
+          <h2>🗑 ゴミ分別クイズ <span class="tag">追加・あそび</span></h2>
+          <p style="font-size:15px;margin:6px 0 10px;">全10問。「このゴミは何ゴミ？」に3択で答えます。※ 分別のルールは自治体で異なります。これはふじみ野市の目安です。</p>
+          <div id="bw2GomiView" style="font-size:17px;line-height:1.6;white-space:pre-wrap;">下のボタンでスタートします。</div>
+          <div id="bw2GomiBtns" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
+            <button type="button" id="bw2GomiStart" style="min-height:48px;padding:10px 18px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">クイズスタート</button>
+          </div>
+        </section>
+
+        <section class="card tool-sec" style="grid-column:1/-1;" aria-label="定番品の値段メモ">
+          <h2>🧾 定番品の値段メモ <span class="tag">追加・ツール</span></h2>
+          <p style="font-size:15px;margin:6px 0 10px;">いつも買う品物の値段を記録します。同じ品物をまた記録すると、前回との差（前回比）を表示します。記録はこの端末の中だけに保存されます。</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0;">
+            <input type="text" id="bw2PriceName" placeholder="品物名（例：たまご10個）" style="font-size:16px;min-height:48px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);width:200px;" />
+            <input type="number" id="bw2PriceVal" placeholder="値段（円）" style="font-size:16px;min-height:48px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);width:120px;" />
+            <input type="text" id="bw2PriceStore" placeholder="店名（任意）" style="font-size:16px;min-height:48px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);width:160px;" />
+            <button type="button" id="bw2PriceAdd" style="min-height:48px;padding:10px 18px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">記録する</button>
+          </div>
+          <div id="bw2PriceMsg" style="font-size:14px;color:var(--ink-soft);margin:4px 0;"></div>
+          <div id="bw2PriceList" style="font-size:16px;line-height:1.6;"></div>
+        </section>
+
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="避難場所マップへのリンク">
+          <h2>🏠 避難場所マップへのリンク <span class="tag">追加・情報</span></h2>
+          <p style="font-size:15px;margin:6px 0 10px;">災害時の避難場所・ハザードマップを確認できる公式ページへのリンクです（外部サイトが開きます）。</p>
+          <a href="https://disaportal.gsi.go.jp/" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;margin-bottom:10px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid #4a90d9;background:#2f6fb2;color:#fff;text-decoration:none;">国土交通省 ハザードマップポータル（公式）</a>
+          <a href="https://www.city.fujimino.saitama.jp/" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;margin-bottom:10px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid #4a90d9;background:#2f6fb2;color:#fff;text-decoration:none;">ふじみ野市公式サイト（公式トップ）</a>
+          <a href="https://www.google.com/search?q=%E3%81%B5%E3%81%98%E3%81%BF%E9%87%8E%E5%B8%82+%E9%81%BF%E9%9B%A3%E5%A0%B4%E6%89%80" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);text-decoration:none;">「ふじみ野市 避難場所」を検索（Google検索）</a>
+          <p style="font-size:13px;color:var(--ink-soft);margin:8px 0 0;">※ ふじみ野市公式サイトでは、サイト内の検索で「避難場所」「ハザードマップ」と探すと市の防災ページが見つかります。</p>
+        </section>
+      <!-- BOARD-W2 END -->
+<!-- BOARD-W3 START -->
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="埼玉県の天気概況（気象庁）">
+          <h2>埼玉県の天気概況（気象庁） <span class="tag">追加情報</span></h2>
+          <div id="bw3GaikyoHead" style="font-size:19px;font-weight:900;margin:6px 0;"></div>
+          <div id="bw3GaikyoText" style="font-size:17px;line-height:1.7;white-space:pre-wrap;">天気概況を読み込み中…</div>
+          <p class="asof" id="bw3GaikyoMeta"></p>
+        </section>
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="標高（国土地理院）">
+          <h2>標高（国土地理院） <span class="tag">追加情報</span></h2>
+          <div id="bw3ElevSelWrap" style="display:none;margin:8px 0;">
+            <label for="bw3ElevSel" style="font-size:16px;font-weight:700;">地点を選んでください</label><br />
+            <select id="bw3ElevSel" style="min-height:48px;font-size:17px;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);margin-top:6px;">
+              <option value="0">ふじみ野市</option>
+              <option value="1">川越市</option>
+              <option value="2">練馬区</option>
+              <option value="3">壬生町</option>
+            </select>
+          </div>
+          <div id="bw3ElevView" style="font-size:20px;font-weight:900;margin:8px 0;">標高を読み込み中…</div>
+          <p style="font-size:13px;color:var(--ink-soft);margin:0;" id="bw3ElevNote">上の天気の地点タブと連動します。国土地理院の標高APIから取得しています。</p>
+        </section>
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="火山情報と川・電力の公式リンク">
+          <h2>火山情報・川と電力 <span class="tag">追加情報</span></h2>
+          <div class="playbox">
+            <h3>🌋 火山情報（気象庁）</h3>
+            <div id="bw3VolcList"><div style="font-size:17px;">火山情報を読み込み中…</div></div>
+            <p class="asof" id="bw3VolcMeta"></p>
+          </div>
+          <div class="playbox">
+            <h3>🏞 川の水位・電力（公式）</h3>
+            <p style="font-size:13px;color:var(--ink-soft);margin:6px 0 10px;">水位と電力使用率は、公式データにページから直接読める形式がないため、公式ページへのリンクです。</p>
+            <a href="https://www.river.go.jp/" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid #4a90d9;background:#2f6fb2;color:#fff;text-decoration:none;margin-bottom:10px;">川の防災情報（国土交通省）</a>
+            <a href="https://k.river.go.jp/" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid #4a90d9;background:#2f6fb2;color:#fff;text-decoration:none;margin-bottom:10px;">川の防災情報モバイル</a>
+            <a href="https://www.tepco.co.jp/forecast/" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid #4a90d9;background:#2f6fb2;color:#fff;text-decoration:none;margin-bottom:10px;">東電 でんき予報（電力使用状況）</a>
+            <a href="https://teideninfo.tepco.co.jp/" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid #4a90d9;background:#2f6fb2;color:#fff;text-decoration:none;">東電 停電情報</a>
+          </div>
+        </section>
+      <!-- BOARD-W3 END -->
 <div id="toast"></div>
       <button type="button" id="backTopBtn">↑</button>
       <div class="tabbar tabbar-bottom">
@@ -4963,6 +5116,577 @@ baRenderAnniv();
     document.addEventListener("DOMContentLoaded", ccInit);
   } else {
     ccInit();
+  }
+})();
+</script>
+<script>
+/* BOARD-W1: 交通・鉄道・停電・NHK埼玉ニュース（見出し方式） */
+(function () {
+  function bw1Stamp() {
+    var d = new Date();
+    function p2(n) { return (n < 10 ? "0" : "") + n; }
+    return d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日 " + p2(d.getHours()) + ":" + p2(d.getMinutes());
+  }
+  function bw1Fail(ul, asof, srcText) {
+    if (ul) {
+      ul.innerHTML = "";
+      var li = document.createElement("li");
+      li.textContent = "見出しを取得できませんでした。通信環境を確認して、ページを開き直してみてください。";
+      ul.appendChild(li);
+    }
+    if (asof) asof.textContent = srcText + " ／ 取得に失敗しました（" + bw1Stamp() + " 試行）";
+  }
+  function bw1LoadNews(ulId, asofId, feedUrl, srcText, defSrc, maxN) {
+    var ul = document.getElementById(ulId);
+    var asof = document.getElementById(asofId);
+    if (!ul) return;
+    var url = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feedUrl);
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.timeout = 20000;
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState !== 4) return;
+      var ok = false;
+      try {
+        if (xhr.status === 200) {
+          var j = JSON.parse(xhr.responseText);
+          if (j && j.items && j.items.length) {
+            var rows = [];
+            for (var i = 0; i < j.items.length; i++) {
+              var it = j.items[i];
+              var ttl = it.title || "", sname = defSrc;
+              var cut = ttl.lastIndexOf(" - ");
+              if (cut > 0) { sname = ttl.substring(cut + 3); ttl = ttl.substring(0, cut); }
+              var t = 0, dstr = "";
+              if (it.pubDate) {
+                var pd = new Date(String(it.pubDate).replace(/-/g, "/"));
+                if (!isNaN(pd.getTime())) { t = pd.getTime(); dstr = (pd.getMonth() + 1) + "/" + pd.getDate(); }
+              }
+              rows.push({ ttl: ttl, link: it.link || "", sname: sname, t: t, dstr: dstr });
+            }
+            rows.sort(function (a, b) { return b.t - a.t; });
+            ul.innerHTML = "";
+            rows.slice(0, maxN).forEach(function (r) {
+              var li = document.createElement("li");
+              var a = document.createElement("a");
+              a.href = r.link; a.target = "_blank"; a.rel = "noopener";
+              var meta = document.createElement("div");
+              meta.className = "news-meta";
+              var src = document.createElement("span");
+              src.className = "news-src"; src.textContent = r.sname;
+              var dt = document.createElement("span");
+              dt.textContent = r.dstr;
+              meta.appendChild(src); meta.appendChild(dt);
+              var title = document.createElement("div");
+              title.className = "news-title";
+              title.textContent = r.ttl;
+              a.appendChild(meta); a.appendChild(title);
+              li.appendChild(a);
+              ul.appendChild(li);
+            });
+            ok = true;
+          }
+        }
+      } catch (e) { ok = false; }
+      if (!ok) bw1Fail(ul, asof, srcText);
+      else if (asof) asof.textContent = srcText + " ／ " + bw1Stamp() + " 取得時点";
+    };
+    try { xhr.send(null); } catch (e) { bw1Fail(ul, asof, srcText); }
+  }
+  function bw1Google(query) {
+    return "https://news.google.com/rss/search?q=" + query + "&hl=ja&gl=JP&ceid=JP:ja";
+  }
+  function bw1Init() {
+    bw1LoadNews("bw1NewsTraffic", "bw1AsofTraffic",
+      bw1Google("関東 交通事故 通行止め 高速道路"),
+      "出典：Googleニュース（関東 交通事故・通行止め・高速道路 検索）", "Googleニュース", 6);
+    bw1LoadNews("bw1NewsTobu", "bw1AsofTobu",
+      bw1Google("東武東上線 遅延 運転見合わせ"),
+      "出典：Googleニュース（東武東上線 遅延・運転見合わせ 検索）", "Googleニュース", 3);
+    bw1LoadNews("bw1NewsSeibu", "bw1AsofSeibu",
+      bw1Google("西武線 遅延 運転見合わせ"),
+      "出典：Googleニュース（西武線 遅延・運転見合わせ 検索）", "Googleニュース", 3);
+    bw1LoadNews("bw1NewsKawagoe", "bw1AsofKawagoe",
+      bw1Google("JR川越線 遅延 運転見合わせ"),
+      "出典：Googleニュース（JR川越線 遅延・運転見合わせ 検索）", "Googleニュース", 3);
+    bw1LoadNews("bw1NewsPower", "bw1AsofPower",
+      bw1Google("関東 停電 東京電力"),
+      "出典：Googleニュース（関東 停電・東京電力 検索）", "Googleニュース", 6);
+    bw1LoadNews("bw1NewsNhk", "bw1AsofNhk",
+      "https://www.bing.com/news/search?q=NHK 埼玉&format=rss",
+      "出典：Bingニュース（NHK 埼玉 検索）", "Bingニュース", 6);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bw1Init);
+  } else {
+    bw1Init();
+  }
+})();
+</script>
+<script>
+/* ============ BOARD-W2：体重／おさんぽガチャ／川柳／ゴミ分別クイズ／値段メモ（独立ブロック） ============ */
+(function () {
+  function bw2El(id) { return document.getElementById(id); }
+  function bw2Pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function bw2Esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function bw2CopyText(text, msgEl, okMsg) {
+    function done(ok) { if (msgEl) msgEl.textContent = ok ? okMsg : "コピーできませんでした。文字を長押ししてコピーしてください。"; }
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed"; ta.style.left = "-9999px"; ta.style.top = "0";
+      document.body.appendChild(ta);
+      ta.select(); ta.setSelectionRange(0, ta.value.length);
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      done(ok);
+    } catch (e2) { done(false); }
+  }
+
+  /* ---------- (204) バーチャルダックスの体重 ---------- */
+  var BW2_WEIGHT = [1.1, 1.6, 2.2, 2.7, 3.1, 3.2, 3.3, 3.4];
+  function bw2StageName(lv) {
+    if (lv >= 8) return "ベテラン";
+    if (lv >= 5) return "おとな";
+    if (lv >= 3) return "わか犬";
+    return "パピー";
+  }
+  var bw2WeightBtn = bw2El("bw2WeightBtn");
+  if (bw2WeightBtn) bw2WeightBtn.addEventListener("click", function () {
+    var view = bw2El("bw2WeightView");
+    if (!view) return;
+    var d = null;
+    try { if (typeof dog !== "undefined") d = dog; } catch (e) { d = null; }
+    if (!d || typeof d.level !== "number") {
+      view.textContent = "ペットのデータが読み取れませんでした。育成タブでダックスが表示されているか確認してから、もう一度押してください。";
+      return;
+    }
+    var lv = d.level;
+    var w = BW2_WEIGHT[Math.min(Math.max(lv, 1), 8) - 1];
+    var nm = (typeof d.name === "string" && d.name) ? d.name : "ダックス";
+    view.textContent = nm + "（Lv." + lv + "・" + bw2StageName(lv) + "）の推定体重は 約" + w.toFixed(1) + "kg です。\n目安の範囲：" + (w - 0.3).toFixed(1) + "〜" + (w + 0.3).toFixed(1) + "kg（カニンヘンダックスフントの成長の目安から計算した推定です。実際の体重ではありません）";
+  });
+
+  /* ---------- (205) おさんぽコースガチャ ---------- */
+  var BW2_COURSES = [
+    { n: "びん沼自然公園ぐるりコース（ふじみ野市）", d: "約2km", c: "沼のまわりを一周。水鳥をながめながらのんびり歩けます。" },
+    { n: "新河岸川 土手さんぽコース（ふじみ野市）", d: "約3km", c: "川沿いの土手をまっすぐ。川風が気持ちいい定番コース。" },
+    { n: "福岡中央公園と市役所前コース（ふじみ野市）", d: "約1km", c: "短めで気軽。ちょっとだけ歩きたい日に。" },
+    { n: "上福岡駅前商店街ぶらりコース（ふじみ野市）", d: "約1.5km", c: "お店をながめながら歩く、にぎやかコース。" },
+    { n: "大井中央公園コース（ふじみ野市）", d: "約1.2km", c: "近所でのんびり。毎日の散歩にちょうどいい距離。" },
+    { n: "川越 蔵造りの街並み・時の鐘コース（川越市）", d: "約2.5km", c: "小江戸の景色を楽しむ、観光気分のおさんぽ。" },
+    { n: "川越氷川神社 おまいりコース（川越市）", d: "約2km", c: "縁結びで有名な神社へ。境内の木陰が涼しいです。" },
+    { n: "喜多院と成田山川越別院コース（川越市）", d: "約2.5km", c: "お寺をめぐる、落ち着いたコース。" },
+    { n: "川越水上公園コース（川越市）", d: "約2km", c: "広い公園の中をぐるり。芝生でのびのび。" },
+    { n: "伊佐沼公園コース（川越市）", d: "約2km", c: "大きな沼のまわりを歩く、景色のいいコース。" }
+  ];
+  var bw2WalkBtn = bw2El("bw2WalkBtn");
+  if (bw2WalkBtn) bw2WalkBtn.addEventListener("click", function () {
+    var view = bw2El("bw2WalkView");
+    if (!view) return;
+    var c = bw2Pick(BW2_COURSES);
+    view.textContent = "🎯 今日のおすすめは…\n" + c.n + "\n距離：" + c.d + "（目安）\n" + c.c;
+  });
+
+  /* ---------- (206) 川柳ジェネレーター ---------- */
+  var BW2_SENRYU = {
+    dax: {
+      kami: ["あしみじか", "しっぽふり", "ダックスが", "あなほりの", "おひるねの", "かわいくて", "みみたれて", "よくねむる"],
+      naka: ["おやつまつとき", "はしるよはやく", "ねむるよすぐに", "あなほりじょうず", "しっぽをふって", "くんくんにおい", "だっこがすきで", "ごはんをまって"],
+      shimo: ["いいきもち", "たまらない", "しあわせよ", "わんとないて", "ゆめのなか", "ほっとする", "またあした", "にこにこだ"]
+    },
+    daily: {
+      kami: ["あさおきて", "ごはんたべ", "せんたくし", "かいものへ", "ゆうはんは", "おふろあと", "ねるまえに", "やすみのひ"],
+      naka: ["コーヒーのんで", "てれびをみてる", "さんぽにいこう", "でんしゃにゆられ", "ほんをよみつつ", "おちゃをいれては", "せんすであおぎ", "のんびりすごす"],
+      shimo: ["いいひだな", "ほっとする", "またあした", "ゆっくりと", "まあいっか", "にこにこだ", "ねむくなる", "ありがたい"]
+    },
+    season: {
+      kami: ["ゆきまちの", "こたつむり", "みかんあじ", "さむいあさ", "ふゆのそら", "ストーブの", "ねんがじょう", "ほしのよる"],
+      naka: ["はくいきしろく", "ゆきがふりつむ", "かぜがつめたく", "イルミのあかり", "おでんあつあつ", "みかんをむいて", "てぶくろはめて", "こたつでまるく"],
+      shimo: ["ふゆがきた", "あたたかい", "ほっとする", "ゆきげしき", "ねむくなる", "いいゆめを", "またあした", "しろいあさ"]
+    }
+  };
+  var bw2SenryuText = "";
+  var bw2SenryuBtn = bw2El("bw2SenryuBtn");
+  if (bw2SenryuBtn) bw2SenryuBtn.addEventListener("click", function () {
+    var sel = bw2El("bw2SenryuTheme");
+    var view = bw2El("bw2SenryuView");
+    var msg = bw2El("bw2SenryuMsg");
+    if (!view) return;
+    var bank = BW2_SENRYU[(sel && sel.value) || "dax"] || BW2_SENRYU.dax;
+    bw2SenryuText = bw2Pick(bank.kami) + " " + bw2Pick(bank.naka) + " " + bw2Pick(bank.shimo);
+    view.textContent = bw2SenryuText;
+    if (msg) msg.textContent = "";
+  });
+  var bw2SenryuCopy = bw2El("bw2SenryuCopy");
+  if (bw2SenryuCopy) bw2SenryuCopy.addEventListener("click", function () {
+    var msg = bw2El("bw2SenryuMsg");
+    if (!bw2SenryuText) { if (msg) msg.textContent = "まず「川柳を作る」を押してください。"; return; }
+    bw2CopyText(bw2SenryuText, msg, "コピーしました。");
+  });
+
+  /* ---------- (209) ゴミ分別クイズ ---------- */
+  var BW2_GOMI_LABELS = ["燃えるゴミ", "燃えないゴミ", "資源・粗大ゴミ"];
+  var BW2_GOMI = [
+    { q: "生ゴミ（野菜の切りくず）", a: 0, e: "生ゴミは「燃えるゴミ」。水気をよく切って出すのがポイントです。" },
+    { q: "われた茶わん（陶器）", a: 1, e: "陶器は燃えないので「燃えないゴミ」。紙に包んで「われもの」と書くと安全です。" },
+    { q: "ペットボトル", a: 2, e: "ペットボトルは「資源」。キャップとラベルをはずして洗って出すのが目安です。" },
+    { q: "古新聞", a: 2, e: "新聞紙は「資源」。ひもでしばって資源回収へ。" },
+    { q: "乾電池", a: 1, e: "乾電池は燃やせないので「燃えないゴミ」側。自治体によっては有害ゴミとして別回収です。" },
+    { q: "庭の木の枝（短く切ったもの）", a: 0, e: "短く切って束ねた枝は「燃えるゴミ」が目安。太いものは粗大ゴミになる場合があります。" },
+    { q: "大きなタンス（家具）", a: 2, e: "大きな家具は「粗大ゴミ」。申し込みが必要な自治体が多いです。" },
+    { q: "金属のフライパン", a: 1, e: "金属製品は「燃えないゴミ」です。" },
+    { q: "古着（まだ着られる衣類）", a: 2, e: "古着は「資源（古布）」として回収されることが多いです。よごれがひどいものは燃えるゴミへ。" },
+    { q: "使い捨てライター", a: 1, e: "ライターは「燃えないゴミ」。中身を使い切ってから出してください。" }
+  ];
+  var bw2GomiIdx = -1, bw2GomiScore = 0, bw2GomiAnswered = false;
+  function bw2GomiBtnStyle() {
+    return "min-height:48px;padding:10px 18px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);";
+  }
+  function bw2GomiRender() {
+    var view = bw2El("bw2GomiView");
+    var btns = bw2El("bw2GomiBtns");
+    if (!view || !btns) return;
+    btns.innerHTML = "";
+    if (bw2GomiIdx < 0) {
+      view.textContent = "下のボタンでスタートします。";
+      var st = document.createElement("button");
+      st.type = "button"; st.id = "bw2GomiStart"; st.setAttribute("style", bw2GomiBtnStyle());
+      st.textContent = "クイズスタート";
+      st.addEventListener("click", bw2GomiStart);
+      btns.appendChild(st);
+      return;
+    }
+    if (bw2GomiIdx >= BW2_GOMI.length) {
+      view.textContent = "🎉 おわり！ 結果は " + BW2_GOMI.length + "問中 " + bw2GomiScore + "問 正解でした。\n" + (bw2GomiScore >= 9 ? "すばらしい！分別の達人です。" : bw2GomiScore >= 6 ? "よくできました。まちがえた所は解説をチェック。" : "おつかれさま。解説を見て覚えていきましょう。") + "\n※ 分別のルールは自治体で異なります。実際はふじみ野市の案内で確認してください。";
+      var ag = document.createElement("button");
+      ag.type = "button"; ag.setAttribute("style", bw2GomiBtnStyle());
+      ag.textContent = "もう一度";
+      ag.addEventListener("click", bw2GomiStart);
+      btns.appendChild(ag);
+      return;
+    }
+    var item = BW2_GOMI[bw2GomiIdx];
+    view.textContent = "第" + (bw2GomiIdx + 1) + "問（" + (bw2GomiIdx + 1) + "／" + BW2_GOMI.length + "）\n「" + item.q + "」は何ゴミ？";
+    bw2GomiAnswered = false;
+    for (var i = 0; i < BW2_GOMI_LABELS.length; i++) {
+      (function (idx) {
+        var b = document.createElement("button");
+        b.type = "button"; b.setAttribute("style", bw2GomiBtnStyle());
+        b.textContent = BW2_GOMI_LABELS[idx];
+        b.addEventListener("click", function () { bw2GomiAnswer(idx); });
+        btns.appendChild(b);
+      })(i);
+    }
+  }
+  function bw2GomiStart() {
+    bw2GomiIdx = 0; bw2GomiScore = 0;
+    bw2GomiRender();
+  }
+  function bw2GomiAnswer(idx) {
+    if (bw2GomiAnswered || bw2GomiIdx < 0 || bw2GomiIdx >= BW2_GOMI.length) return;
+    bw2GomiAnswered = true;
+    var item = BW2_GOMI[bw2GomiIdx];
+    var view = bw2El("bw2GomiView");
+    var btns = bw2El("bw2GomiBtns");
+    if (!view || !btns) return;
+    var ok = (idx === item.a);
+    if (ok) bw2GomiScore++;
+    view.textContent = (ok ? "⭕ 正解！" : "❌ ざんねん。正解は「" + BW2_GOMI_LABELS[item.a] + "」です。") + "\n" + item.e + "\n（これまでの正解：" + bw2GomiScore + "問）";
+    btns.innerHTML = "";
+    var nx = document.createElement("button");
+    nx.type = "button"; nx.setAttribute("style", bw2GomiBtnStyle());
+    nx.textContent = (bw2GomiIdx + 1 >= BW2_GOMI.length) ? "結果を見る" : "次の問題へ";
+    nx.addEventListener("click", function () { bw2GomiIdx++; bw2GomiRender(); });
+    btns.appendChild(nx);
+  }
+  var bw2GomiStartBtn = bw2El("bw2GomiStart");
+  if (bw2GomiStartBtn) bw2GomiStartBtn.addEventListener("click", bw2GomiStart);
+
+  /* ---------- (207) 定番品の値段メモ ---------- */
+  var BW2_PRICE_KEY = "board_price_memo_v1";
+  function bw2PriceLoad() {
+    try {
+      var raw = window.localStorage.getItem(BW2_PRICE_KEY);
+      if (!raw) return [];
+      var arr = JSON.parse(raw);
+      return (arr && typeof arr.length === "number") ? arr : [];
+    } catch (e) { return []; }
+  }
+  function bw2PriceSave(arr) {
+    try { window.localStorage.setItem(BW2_PRICE_KEY, JSON.stringify(arr)); return true; }
+    catch (e) { return false; }
+  }
+  function bw2PriceRender() {
+    var list = bw2El("bw2PriceList");
+    if (!list) return;
+    var arr = bw2PriceLoad();
+    if (!arr.length) {
+      list.innerHTML = "<p style=\"margin:6px 0;\">まだ記録がありません。</p>";
+      return;
+    }
+    var html = '<table style="border-collapse:collapse;width:100%;font-size:15px;">';
+    html += '<tr><th style="text-align:left;padding:6px;border-bottom:2px solid var(--line);">品物</th><th style="text-align:right;padding:6px;border-bottom:2px solid var(--line);">値段</th><th style="text-align:left;padding:6px;border-bottom:2px solid var(--line);">前回比</th><th style="text-align:left;padding:6px;border-bottom:2px solid var(--line);">店・日付</th><th style="padding:6px;border-bottom:2px solid var(--line);"></th></tr>';
+    for (var i = arr.length - 1; i >= 0; i--) {
+      var it = arr[i];
+      var diff = "—（はじめて）";
+      for (var j = i - 1; j >= 0; j--) {
+        if (arr[j].n === it.n) {
+          var dv = it.p - arr[j].p;
+          diff = dv === 0 ? "±0（同じ）" : (dv > 0 ? "+" + dv + "円" : dv + "円");
+          break;
+        }
+      }
+      html += "<tr>";
+      html += '<td style="padding:6px;border-bottom:1px solid var(--line);">' + bw2Esc(it.n) + "</td>";
+      html += '<td style="padding:6px;border-bottom:1px solid var(--line);text-align:right;font-weight:700;">' + it.p + "円</td>";
+      html += '<td style="padding:6px;border-bottom:1px solid var(--line);">' + diff + "</td>";
+      html += '<td style="padding:6px;border-bottom:1px solid var(--line);">' + bw2Esc(it.s || "") + (it.s ? " " : "") + bw2Esc(it.d || "") + "</td>";
+      html += '<td style="padding:6px;border-bottom:1px solid var(--line);"><button type="button" class="bw2PriceDel" data-bw2idx="' + i + '" style="min-height:44px;padding:6px 12px;font-size:15px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">削除</button></td>';
+      html += "</tr>";
+    }
+    html += "</table>";
+    list.innerHTML = html;
+    var dels = list.querySelectorAll(".bw2PriceDel");
+    for (var k = 0; k < dels.length; k++) {
+      dels[k].addEventListener("click", function () {
+        var idx = parseInt(this.getAttribute("data-bw2idx"), 10);
+        var a2 = bw2PriceLoad();
+        if (!isNaN(idx) && idx >= 0 && idx < a2.length) {
+          a2.splice(idx, 1);
+          bw2PriceSave(a2);
+          bw2PriceRender();
+        }
+      });
+    }
+  }
+  var bw2PriceAdd = bw2El("bw2PriceAdd");
+  if (bw2PriceAdd) bw2PriceAdd.addEventListener("click", function () {
+    var nameEl = bw2El("bw2PriceName");
+    var valEl = bw2El("bw2PriceVal");
+    var storeEl = bw2El("bw2PriceStore");
+    var msg = bw2El("bw2PriceMsg");
+    var nm = nameEl ? nameEl.value.replace(/^\s+|\s+$/g, "") : "";
+    var pv = valEl ? parseInt(valEl.value, 10) : NaN;
+    if (!nm) { if (msg) msg.textContent = "品物名を入れてください。"; return; }
+    if (isNaN(pv) || pv < 0) { if (msg) msg.textContent = "値段（数字）を入れてください。"; return; }
+    var now = new Date();
+    var ds = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
+    var arr = bw2PriceLoad();
+    arr.push({ n: nm, p: pv, s: storeEl ? storeEl.value.replace(/^\s+|\s+$/g, "") : "", d: ds });
+    if (arr.length > 100) arr = arr.slice(arr.length - 100);
+    if (bw2PriceSave(arr)) {
+      if (msg) msg.textContent = "記録しました：" + nm + " " + pv + "円";
+      if (nameEl) nameEl.value = "";
+      if (valEl) valEl.value = "";
+      if (storeEl) storeEl.value = "";
+      bw2PriceRender();
+    } else {
+      if (msg) msg.textContent = "保存できませんでした（端末の保存領域が使えない状態です）。";
+    }
+  });
+  bw2PriceRender();
+})();
+</script>
+<script>
+/* ============ BOARD-W3：天気概況／標高／火山・公式リンク（独立ブロック） ============ */
+(function () {
+  function bw3El(id) { return document.getElementById(id); }
+  function bw3Pad(n) { return (n < 10 ? "0" : "") + n; }
+  function bw3NowStr() {
+    var d = new Date();
+    return d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日 " + d.getHours() + "時" + bw3Pad(d.getMinutes()) + "分";
+  }
+  function bw3IsoStr(s) {
+    if (!s || s.length < 16) return s || "";
+    var y = s.substring(0, 4);
+    var mo = parseInt(s.substring(5, 7), 10);
+    var da = parseInt(s.substring(8, 10), 10);
+    var hh = s.substring(11, 13);
+    var mm = s.substring(14, 16);
+    return y + "年" + mo + "月" + da + "日 " + hh + "時" + mm + "分";
+  }
+  function bw3Esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function bw3Get(url, ok, ng) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.timeout = 20000;
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) { ok(xhr); }
+      else if (ng) { ng(); }
+    };
+    xhr.onerror = function () { if (ng) { ng(); } };
+    xhr.ontimeout = function () { if (ng) { ng(); } };
+    xhr.send(null);
+  }
+  function bw3GetJSON(url, ok, ng) {
+    bw3Get(url, function (xhr) {
+      try { ok(JSON.parse(xhr.responseText)); }
+      catch (e) { if (ng) { ng(); } }
+    }, ng);
+  }
+
+  /* ---------- (210) 気象庁の天気概況文（埼玉県） ---------- */
+  function bw3LoadGaikyo() {
+    var head = bw3El("bw3GaikyoHead");
+    var body = bw3El("bw3GaikyoText");
+    var meta = bw3El("bw3GaikyoMeta");
+    if (!body) return;
+    bw3GetJSON("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/110000.json", function (j) {
+      if (head) { head.textContent = j.headlineText ? j.headlineText : ""; }
+      body.textContent = j.text ? j.text : "概況文がありませんでした。";
+      if (meta) {
+        meta.textContent = "発表：" + (j.publishingOffice || "気象庁") + "（" + bw3IsoStr(j.reportDatetime) + "）／ 取得：" + bw3NowStr();
+      }
+    }, function () {
+      body.textContent = "天気概況を取得できませんでした。";
+      if (meta) { meta.textContent = "取得：" + bw3NowStr() + "（失敗）"; }
+    });
+  }
+
+  /* ---------- (211) 標高表示（国土地理院） ---------- */
+  var BW3_FALLBACK_LOCS = [
+    { name: "ふじみ野市", lat: 35.8795, lon: 139.5197 },
+    { name: "川越市", lat: 35.9251, lon: 139.4858 },
+    { name: "練馬区", lat: 35.7356, lon: 139.6517 },
+    { name: "壬生町", lat: 36.4422, lon: 139.8147 }
+  ];
+  var bw3ElevCache = {};
+  var bw3ElevLastKey = "";
+  function bw3ShowElev(name, lat, lon) {
+    var view = bw3El("bw3ElevView");
+    if (!view) return;
+    var key = lat + "," + lon;
+    bw3ElevLastKey = key;
+    if (bw3ElevCache[key] != null) {
+      view.textContent = name + "の標高：約" + bw3ElevCache[key] + "m（国土地理院）";
+      return;
+    }
+    view.textContent = name + "の標高を取得中…";
+    bw3GetJSON("https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php?lon=" + lon + "&lat=" + lat + "&outtype=JSON", function (j) {
+      if (bw3ElevLastKey !== key) return;
+      if (j && typeof j.elevation === "number") {
+        bw3ElevCache[key] = j.elevation;
+        view.textContent = name + "の標高：約" + j.elevation + "m（国土地理院）";
+      } else {
+        view.textContent = name + "の標高を取得できませんでした。";
+      }
+    }, function () {
+      if (bw3ElevLastKey !== key) return;
+      view.textContent = name + "の標高を取得できませんでした（" + bw3NowStr() + "）。";
+    });
+  }
+  function bw3PollLoc() {
+    try {
+      if (typeof LOCATIONS === "undefined" || typeof curLoc === "undefined") return;
+      var loc = LOCATIONS[curLoc];
+      if (!loc) return;
+      var key = loc.lat + "," + loc.lon;
+      if (key !== bw3ElevLastKey) { bw3ShowElev(loc.name, loc.lat, loc.lon); }
+    } catch (e) {}
+  }
+  function bw3InitElev() {
+    var useGlobal = false;
+    var loc = null;
+    try {
+      if (typeof LOCATIONS !== "undefined" && typeof curLoc !== "undefined" && LOCATIONS && LOCATIONS.length) {
+        loc = LOCATIONS[curLoc] || LOCATIONS[0];
+        if (loc) { useGlobal = true; }
+      }
+    } catch (e) {}
+    if (useGlobal) {
+      bw3ShowElev(loc.name, loc.lat, loc.lon);
+      setInterval(bw3PollLoc, 2000);
+    } else {
+      var wrap = bw3El("bw3ElevSelWrap");
+      if (wrap) { wrap.style.display = "block"; }
+      var note = bw3El("bw3ElevNote");
+      if (note) { note.textContent = "地点を選ぶと、国土地理院の標高APIから標高を取得します。"; }
+      bw3ShowElev(BW3_FALLBACK_LOCS[0].name, BW3_FALLBACK_LOCS[0].lat, BW3_FALLBACK_LOCS[0].lon);
+    }
+    var sel = bw3El("bw3ElevSel");
+    if (sel) {
+      sel.addEventListener("change", function () {
+        var l = BW3_FALLBACK_LOCS[parseInt(sel.value, 10) || 0];
+        if (l) { bw3ShowElev(l.name, l.lat, l.lon); }
+      });
+    }
+  }
+
+  /* ---------- (213a) 火山情報（気象庁 地震火山関連フィード） ---------- */
+  function bw3LoadVolc() {
+    var list = bw3El("bw3VolcList");
+    var meta = bw3El("bw3VolcMeta");
+    if (!list) return;
+    function bw3VolcFail() {
+      list.innerHTML = '<div style="font-size:17px;">火山情報を取得できませんでした。</div>';
+      if (meta) { meta.textContent = "取得：" + bw3NowStr() + "（失敗）"; }
+    }
+    bw3Get("https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml", function (xhr) {
+      var xml = xhr.responseXML;
+      if (!xml && xhr.responseText && window.DOMParser) {
+        try { xml = new DOMParser().parseFromString(xhr.responseText, "text/xml"); } catch (e) { xml = null; }
+      }
+      if (!xml) { bw3VolcFail(); return; }
+      var entries = xml.getElementsByTagName("entry");
+      if (!entries || !entries.length) { entries = xml.getElementsByTagNameNS("*", "entry"); }
+      var html = "";
+      var count = 0;
+      for (var i = 0; i < entries.length && count < 6; i++) {
+        var en = entries[i];
+        var tEl = en.getElementsByTagName("title")[0];
+        if (!tEl && en.getElementsByTagNameNS) {
+          var tNs = en.getElementsByTagNameNS("*", "title");
+          tEl = tNs && tNs.length ? tNs[0] : null;
+        }
+        var title = tEl ? (tEl.textContent || "") : "";
+        if (title.indexOf("噴火警報") < 0 && title.indexOf("降灰予報") < 0 && title.indexOf("火山の状況") < 0) { continue; }
+        var uEl = en.getElementsByTagName("updated")[0];
+        if (!uEl && en.getElementsByTagNameNS) {
+          var uNs = en.getElementsByTagNameNS("*", "updated");
+          uEl = uNs && uNs.length ? uNs[0] : null;
+        }
+        var upd = uEl ? bw3IsoStr(uEl.textContent || "") : "";
+        var href = "";
+        var linkEls = en.getElementsByTagName("link");
+        if (!linkEls || !linkEls.length) { linkEls = en.getElementsByTagNameNS("*", "link"); }
+        for (var k = 0; k < linkEls.length; k++) {
+          var rel = linkEls[k].getAttribute("rel");
+          if (!rel || rel === "alternate") { href = linkEls[k].getAttribute("href") || ""; break; }
+        }
+        var inner = '<span style="font-size:17px;font-weight:700;">' + bw3Esc(title) + "</span>";
+        if (upd) { inner += '<br /><span style="font-size:13px;color:var(--ink-soft);">' + bw3Esc(upd) + "</span>"; }
+        if (href) {
+          html += '<a href="' + bw3Esc(href) + '" target="_blank" rel="noopener" style="display:block;padding:12px;min-height:48px;margin:8px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);text-decoration:none;">' + inner + "</a>";
+        } else {
+          html += '<div style="padding:12px;margin:8px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);">' + inner + "</div>";
+        }
+        count++;
+      }
+      if (count === 0) {
+        list.innerHTML = '<div style="font-size:17px;">現在、噴火警報等は発表されていません（フィード確認済み）</div>';
+      } else {
+        list.innerHTML = html;
+      }
+      if (meta) { meta.textContent = "気象庁 地震火山関連フィード ／ 取得：" + bw3NowStr(); }
+    }, bw3VolcFail);
+  }
+
+  /* ---------- 初期化 ---------- */
+  function bw3Init() {
+    bw3LoadGaikyo();
+    bw3InitElev();
+    bw3LoadVolc();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bw3Init);
+  } else {
+    bw3Init();
   }
 })();
 </script>
