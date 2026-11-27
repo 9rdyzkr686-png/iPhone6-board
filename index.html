@@ -1361,7 +1361,6 @@
           </div>
         </section>
 
-      </div>
       <!-- BOARD-B START -->
         <section class="card info-sec" style="grid-column:1/-1;" aria-label="カレンダーと富士山・花粉">
           <h2>カレンダー・富士山・花粉 <span class="tag">追加情報</span></h2>
@@ -1555,6 +1554,16 @@
           </div>
         </section>
       <!-- BOARD-W3 END -->
+      <!-- BOARD-W4 START -->
+        <section class="card info-sec" id="bw4TocCard" style="grid-column:1/-1;" aria-label="情報タブ目次">
+          <h2>🧭 情報タブ目次 <span class="tag">ジャンプ</span></h2>
+          <p style="font-size:14px;color:var(--ink-soft);margin:0 0 10px;">情報タブのカードが増えたので、目次から一気に移動できます。ボタンを押すと、そのカードまでスクロールして光ります。</p>
+          <div id="bw4TocGrid" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+          <p class="asof" id="bw4TocCount"></p>
+        </section>
+      <!-- BOARD-W4 END -->
+</div>
+      
 <div id="toast"></div>
       <button type="button" id="backTopBtn">↑</button>
       <div class="tabbar tabbar-bottom">
@@ -5688,6 +5697,88 @@ baRenderAnniv();
   } else {
     bw3Init();
   }
+})();
+</script>
+<script>
+(function () {
+  /* BOARD-W4: 情報タブ目次ジャンプ（235） */
+  var bw4TocCard = document.getElementById("bw4TocCard");
+  var bw4Grid = document.getElementById("bw4TocGrid");
+  var bw4Count = document.getElementById("bw4TocCount");
+  if (!bw4TocCard || !bw4Grid) return;
+
+  function bw4Title(sec) {
+    var h = sec.querySelector("h2, h3, .card-title");
+    var t = "";
+    if (h) {
+      for (var i = 0; i < h.childNodes.length; i++) {
+        var n = h.childNodes[i];
+        if (n.nodeType === 3) t += n.nodeValue;
+        else if (n.nodeType === 1 && (" " + (typeof n.className === "string" ? n.className : "") + " ").indexOf(" tag ") < 0) t += n.textContent || "";
+      }
+      t = t.replace(/^\s+|\s+$/g, "").replace(/\s+/g, " ");
+    }
+    if (!t) t = (sec.getAttribute("aria-label") || "").replace(/^\s+|\s+$/g, "");
+    return t;
+  }
+
+  function bw4Flash(sec) {
+    if (sec._bw4Timer) clearTimeout(sec._bw4Timer);
+    sec.style.outline = "3px solid #e67e22";
+    sec.style.outlineOffset = "-3px";
+    sec._bw4Timer = setTimeout(function () {
+      sec.style.outline = "";
+      sec.style.outlineOffset = "";
+    }, 1200);
+  }
+
+  function bw4Jump(sec) {
+    var done = false;
+    try {
+      if (sec.scrollIntoView) { sec.scrollIntoView(); done = true; }
+    } catch (e) { done = false; }
+    if (!done) {
+      var t = 0, n = sec;
+      while (n) { t += n.offsetTop || 0; n = n.offsetParent; }
+      window.scrollTo(0, Math.max(0, t - 10));
+    }
+    bw4Flash(sec);
+  }
+
+  function bw4Build() {
+    var secs = document.querySelectorAll(".info-sec, .area-clock, .area-weather, .area-quake, .area-news");
+    var made = 0;
+    for (var i = 0; i < secs.length; i++) {
+      var sec = secs[i];
+      if (sec === bw4TocCard) continue;
+      var title = bw4Title(sec);
+      if (!title) continue;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = title;
+      btn.style.cssText = "flex:1 1 46%;min-height:48px;padding:10px 8px;font-size:16px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);";
+      (function (target, b) {
+        b.addEventListener("click", function () { bw4Jump(target); });
+      })(sec, btn);
+      bw4Grid.appendChild(btn);
+      made++;
+    }
+    if (bw4Count) bw4Count.textContent = made > 0 ? "全" + made + "カード" : "目次を作れませんでした";
+  }
+
+  function bw4Sync() {
+    var act = document.querySelector(".tabbtn.active");
+    var cat = act ? act.getAttribute("data-tab") : "info";
+    bw4TocCard.style.display = cat === "info" ? "" : "none";
+  }
+
+  bw4Build();
+  bw4Sync();
+  var bw4Btns = document.querySelectorAll(".tabbtn");
+  for (var b = 0; b < bw4Btns.length; b++) {
+    bw4Btns[b].addEventListener("click", function () { setTimeout(bw4Sync, 0); });
+  }
+  setInterval(bw4Sync, 800);
 })();
 </script>
 </body>
