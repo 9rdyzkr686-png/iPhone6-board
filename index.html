@@ -744,6 +744,67 @@
           </div>
         </section>
 
+        <!-- BOARD-A START -->
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="もっとニュースとリンク">
+          <h2>もっとニュースとリンク <span class="tag">見出し・記念日・公式リンク</span></h2>
+          <div class="playbox">
+            <h3>🐶 ダックス見出し</h3>
+            <ul class="news-list" id="baNewsDachs"><li>取得中…</li></ul>
+            <p class="asof" id="baAsofDachs"></p>
+          </div>
+          <div class="playbox">
+            <h3>🦖 特撮見出し</h3>
+            <ul class="news-list" id="baNewsToku"><li>取得中…</li></ul>
+            <p class="asof" id="baAsofToku"></p>
+          </div>
+          <div class="playbox">
+            <h3>🎬 映画見出し</h3>
+            <ul class="news-list" id="baNewsMovie"><li>取得中…</li></ul>
+            <p class="asof" id="baAsofMovie"></p>
+          </div>
+          <div class="playbox">
+            <h3>🚄 新幹線・飛行機見出し</h3>
+            <ul class="news-list" id="baNewsTransit"><li>取得中…</li></ul>
+            <p class="asof" id="baAsofTransit"></p>
+          </div>
+          <div class="playbox">
+            <h3>🎪 ふじみ野市イベント</h3>
+            <ul class="news-list" id="baNewsEvent"><li>取得中…</li></ul>
+            <p class="asof" id="baAsofEvent"></p>
+          </div>
+          <div class="playbox">
+            <h3>🚓 防犯情報（埼玉）</h3>
+            <ul class="news-list" id="baNewsCrime"><li>取得中…</li></ul>
+            <p class="asof" id="baAsofCrime"></p>
+          </div>
+          <div class="playbox">
+            <h3>🏟 スポーツ深掘り</h3>
+            <ul class="news-list" id="baNewsSports"><li>取得中…</li></ul>
+            <p class="asof" id="baAsofSports"></p>
+          </div>
+          <div class="playbox">
+            <h3>📅 今日は何の日？</h3>
+            <div class="playlog" id="baAnnivView">読み込み中…</div>
+          </div>
+          <div class="playbox">
+            <h3>🏥 病院・交番リンク集</h3>
+            <div class="mini-row" style="line-height:2.4;">
+              <a href="https://www.city.fujimino.saitama.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🏢 ふじみ野市公式（休日・夜間の診療案内はこちらから）</a><br />
+              <a href="https://www.police.pref.saitama.lg.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🚓 埼玉県警察（交番・防犯情報）</a>
+            </div>
+            <div class="playlog">📞 救急相談ダイヤル「#7119」：急な病気やケガで「救急車を呼ぶか、病院に行くか」迷ったときに相談できます（埼玉県内対応）。命の危険を感じたら、ためらわず119番へ。</div>
+          </div>
+          <div class="playbox">
+            <h3>💡 停電・断水リンク集</h3>
+            <div class="mini-row" style="line-height:2.4;">
+              <a href="https://www.tepco.co.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🔌 東京電力（停電情報はこちらから）</a><br />
+              <a href="https://www.city.fujimino.saitama.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🚰 ふじみ野市公式（水道・断水情報）</a><br />
+              <a href="https://www.jma.go.jp/" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;">🌦 気象庁（警報・注意報）</a>
+            </div>
+          </div>
+        </section>
+        <!-- BOARD-A END -->
+
         <section class="card pet-sec" style="grid-column:1/-1;" aria-label="ダックスの部屋">
           <h2>ダックスの部屋 <span class="tag">図鑑と占い</span></h2>
           <div class="playbox">
@@ -1278,7 +1339,47 @@
         </section>
 
       </div>
-      <div id="toast"></div>
+      <!-- BOARD-B START -->
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="カレンダーと富士山・花粉">
+          <h2>カレンダー・富士山・花粉 <span class="tag">追加情報</span></h2>
+
+          <div style="margin-bottom:20px;">
+            <h3>🗓 月カレンダー</h3>
+            <div style="display:flex;align-items:center;gap:10px;margin:10px 0;">
+              <button type="button" id="bbCalPrev" style="min-height:48px;padding:10px 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">◀ 前の月</button>
+              <div id="bbCalTitle" style="font-size:20px;font-weight:900;flex:1;text-align:center;">----年--月</div>
+              <button type="button" id="bbCalNext" style="min-height:48px;padding:10px 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">次の月 ▶</button>
+            </div>
+            <div id="bbCalGrid"></div>
+          </div>
+
+          <div style="margin-bottom:20px;">
+            <h3>🗻 富士山見え指数（ふじみ野から）</h3>
+            <div id="bbFujiView" style="font-size:17px;">読み込み中…</div>
+            <p style="font-size:13px;color:var(--ink-soft);margin:6px 0 0;">ふじみ野から富士山が見えるかの目安です（概算）。見通し（視程）・湿度・雲の量から計算しています。</p>
+          </div>
+
+          <div style="margin-bottom:20px;">
+            <h3>🌸 花粉情報メモ</h3>
+            <div id="bbPollenSeason" style="font-size:17px;"></div>
+            <div id="bbPollenWind" style="font-size:17px;">風のデータを読み込み中…</div>
+            <p style="font-size:13px;color:var(--ink-soft);margin:6px 0 10px;">※ 花粉の飛散量そのものを測ったデータは、無料で使える公式データがないため表示していません。季節の目安と風の情報だけを載せています。</p>
+            <a href="https://www.google.com/search?q=%E5%9F%BC%E7%8E%89%E7%9C%8C+%E8%8A%B1%E7%B2%89+%E9%A3%9B%E6%95%A3+%E4%BB%8A%E6%97%A5" target="_blank" rel="noopener" style="display:block;text-align:center;min-height:48px;line-height:48px;padding:0 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid #4a90d9;background:#2f6fb2;color:#fff;text-decoration:none;">今日の飛散量を検索で確認</a>
+          </div>
+
+          <div>
+            <h3>🎨 背景グラデーション（一時変更）</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;">
+              <button type="button" class="bbBgBtn" data-bbg="" style="min-height:48px;padding:10px 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">標準（既存）</button>
+              <button type="button" class="bbBgBtn" data-bbg="linear-gradient(#f6d365,#fda085)" style="min-height:48px;padding:10px 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">🌅 朝焼け</button>
+              <button type="button" class="bbBgBtn" data-bbg="linear-gradient(#355c7d,#c06c84,#f8b195)" style="min-height:48px;padding:10px 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">🌇 夕焼け</button>
+              <button type="button" class="bbBgBtn" data-bbg="linear-gradient(#0f2027,#203a43,#2c5364)" style="min-height:48px;padding:10px 16px;font-size:17px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);">🌌 夜空</button>
+            </div>
+            <p style="font-size:13px;color:var(--ink-soft);margin:0;">一時的な背景変更です。このボードには天気・時刻に連動して背景を変える機能があるため、しばらくすると元の背景に戻ることがあります。</p>
+          </div>
+        </section>
+        <!-- BOARD-B END -->
+<div id="toast"></div>
       <button type="button" id="backTopBtn">↑</button>
       <div class="tabbar tabbar-bottom">
         <button type="button" class="tabbtn t-info active" data-tab="info">📰 情報</button>
@@ -4520,5 +4621,308 @@ drawUtilGraph();
       fetchPollen();
 
 </script>
-  </body>
+<!-- BOARD-A SCRIPT START -->
+<script>
+"use strict";
+/* ============ BOARD-A: 追加ニュース・記念日・リンク集 ============ */
+function baStamp() {
+  var d = new Date();
+  function p2(n) { return (n < 10 ? "0" : "") + n; }
+  return d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日 " + p2(d.getHours()) + ":" + p2(d.getMinutes());
+}
+function baLoadNews(ulId, asofId, query, label) {
+  var ul = document.getElementById(ulId);
+  var asof = document.getElementById(asofId);
+  if (!ul) return;
+  var rssUrl = "https://api.rss2json.com/v1/api.json?rss_url=" +
+    encodeURIComponent("https://news.google.com/rss/search?q=" + query + "&hl=ja&gl=JP&ceid=JP:ja");
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", rssUrl, true);
+  xhr.timeout = 20000;
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) return;
+    var ok = false;
+    try {
+      if (xhr.status === 200) {
+        var j = JSON.parse(xhr.responseText);
+        if (j && j.items && j.items.length) {
+          ul.innerHTML = "";
+          j.items.slice(0, 5).forEach(function (it) {
+            var ttl = it.title || "", sname = "Googleニュース";
+            var cut = ttl.lastIndexOf(" - ");
+            if (cut > 0) { sname = ttl.substring(cut + 3); ttl = ttl.substring(0, cut); }
+            var dstr = "";
+            if (it.pubDate) {
+              var pd = new Date(String(it.pubDate).replace(/-/g, "/"));
+              if (!isNaN(pd.getTime())) dstr = (pd.getMonth() + 1) + "/" + pd.getDate();
+            }
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.href = it.link; a.target = "_blank"; a.rel = "noopener";
+            var meta = document.createElement("div");
+            meta.className = "news-meta";
+            var src = document.createElement("span");
+            src.className = "news-src"; src.textContent = sname;
+            var dt = document.createElement("span");
+            dt.textContent = dstr;
+            meta.appendChild(src); meta.appendChild(dt);
+            var title = document.createElement("div");
+            title.className = "news-title";
+            title.textContent = ttl;
+            a.appendChild(meta); a.appendChild(title);
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+          ok = true;
+        }
+      }
+    } catch (e) { ok = false; }
+    if (!ok) {
+      ul.innerHTML = "";
+      var li2 = document.createElement("li");
+      li2.textContent = "見出しを取得できませんでした。通信環境を確認して、ページを開き直してみてください。";
+      ul.appendChild(li2);
+      if (asof) asof.textContent = "出典：Googleニュース（" + label + "検索）／ 取得に失敗しました（" + baStamp() + " 試行）";
+    } else if (asof) {
+      asof.textContent = "出典：Googleニュース（" + label + "検索）／ " + baStamp() + " 取得時点";
+    }
+  };
+  try { xhr.send(null); } catch (e) {
+    ul.innerHTML = "";
+    var li3 = document.createElement("li");
+    li3.textContent = "見出しを取得できませんでした。通信環境を確認して、ページを開き直してみてください。";
+    ul.appendChild(li3);
+    if (asof) asof.textContent = "出典：Googleニュース（" + label + "検索）／ 取得に失敗しました（" + baStamp() + " 試行）";
+  }
+}
+/* 今日は何の日（内蔵データ） */
+var BA_ANNIV = {
+  "1/1": ["元日：新しい1年の始まりです", "元旦：初日の出や初詣に行く人も多い日です"],
+  "1/7": ["七草の日：春の七草がゆを食べて、無病息災を願います"],
+  "1/10": ["110番の日：緊急通報の110番を正しく使おうという日です"],
+  "2/3": ["節分：豆まきをして、福を呼び込む日です"],
+  "2/11": ["建国記念の日：建国をしのび、国を愛する心を養う日です"],
+  "2/14": ["バレンタインデー：チョコレートを贈る日として親しまれています"],
+  "2/22": ["猫の日：「ニャン（2）ニャン（2）ニャン（2）」の語呂合わせです", "忍者の日：同じく「ニン（2）ニン（2）ニン（2）」の語呂合わせです"],
+  "3/3": ["ひな祭り：女の子の健やかな成長を願う行事です", "耳の日：「ミ（3）ミ（3）」の語呂合わせです"],
+  "3/14": ["ホワイトデー：バレンタインデーのお返しをする日です"],
+  "3/20": ["春分の日：昼と夜の長さがほぼ同じになる日です（年によって1日前後します）"],
+  "4/1": ["エイプリルフール：罪のないウソをついてもいいとされる日です"],
+  "4/29": ["昭和の日：昭和の時代をふり返る祝日です"],
+  "5/3": ["憲法記念日：日本国憲法の施行を記念する祝日です"],
+  "5/4": ["みどりの日：自然に親しみ、その恩恵に感謝する祝日です"],
+  "5/5": ["こどもの日：こいのぼりや柏餅でお祝いします", "端午の節句：男の子の成長を願う行事でもあります"],
+  "5/10": ["母の日ごろ：母の日は5月の第2日曜日です（年によって日付が変わります）"],
+  "6/4": ["歯と口の健康週間の始まりごろ：昔は「虫歯予防デー」と呼ばれました（6/4＝ムシの語呂合わせ）"],
+  "6/10": ["時の記念日：時間を大切にしようという日です"],
+  "6/21": ["夏至ごろ：1年で昼が一番長くなる時期です（年によって1日前後します）"],
+  "7/7": ["七夕：織姫と彦星の伝説で知られる星祭りです"],
+  "7/20": ["海の日ごろ：海の日は7月の第3月曜日です（年によって日付が変わります）"],
+  "8/11": ["山の日：山に親しむ祝日です"],
+  "8/15": ["戦没者を追悼し平和を祈念する日：終戦の日です"],
+  "9/1": ["防災の日：関東大震災の教訓から、防災を考える日です"],
+  "9/15": ["敬老の日ごろ：敬老の日は9月の第3月曜日です（年によって日付が変わります）"],
+  "10/10": ["目の愛護デー：「10.10」を目に見立てた語呂合わせです", "昔の体育の日：1964年東京オリンピックの開会式の日でした"],
+  "10/31": ["ハロウィン：仮装やかぼちゃで知られる行事です"],
+  "11/3": ["文化の日：自由と平和を愛し、文化をすすめる祝日です"],
+  "11/11": ["ポッキー＆プリッツの日：「1111」が並んだ形からの語呂合わせです", "介護の日：「いい日、いい日」の語呂合わせです"],
+  "11/15": ["七五三：子どもの成長を祝う行事です"],
+  "11/23": ["勤労感謝の日：働くことに感謝する祝日です"],
+  "11/27": ["ノーベル賞制定記念日：1901年のこの日、ノーベル賞の第1回授賞式が行われました"],
+  "12/23": ["平成時代は天皇誕生日でした：今上陛下の誕生日は2月23日です"],
+  "12/24": ["クリスマスイブ：クリスマス前夜のお祝いの日です"],
+  "12/25": ["クリスマス：世界中で祝われる日です"],
+  "12/31": ["大晦日：1年の最後の日。除夜の鐘が鳴ります"]
+};
+function baRenderAnniv() {
+  var box = document.getElementById("baAnnivView");
+  if (!box) return;
+  var d = new Date();
+  var key = (d.getMonth() + 1) + "/" + d.getDate();
+  var entries = BA_ANNIV[key];
+  box.innerHTML = "";
+  var head = document.createElement("div");
+  head.textContent = "今日は" + (d.getMonth() + 1) + "月" + d.getDate() + "日です。";
+  box.appendChild(head);
+  if (entries && entries.length) {
+    entries.forEach(function (t) {
+      var line = document.createElement("div");
+      line.textContent = "・" + t;
+      box.appendChild(line);
+    });
+  } else {
+    var fb = document.createElement("div");
+    fb.textContent = "・今日の記念日はデータにありませんでした。でも勝手に「ダックスの日（仮）」にしちゃいます！（※ジョークです）";
+    box.appendChild(fb);
+  }
+}
+baLoadNews("baNewsDachs", "baAsofDachs", "ダックスフンド", "ダックスフンド");
+baLoadNews("baNewsToku", "baAsofToku", "特撮 OR ゴジラ", "特撮・ゴジラ");
+baLoadNews("baNewsMovie", "baAsofMovie", "映画 公開", "映画");
+baLoadNews("baNewsTransit", "baAsofTransit", "新幹線 OR 航空", "新幹線・航空");
+baLoadNews("baNewsEvent", "baAsofEvent", "ふじみ野市 イベント", "ふじみ野市イベント");
+baLoadNews("baNewsCrime", "baAsofCrime", "埼玉県 警察 防犯", "防犯");
+baLoadNews("baNewsSports", "baAsofSports", "プロ野球 OR サッカー日本代表", "プロ野球・サッカー日本代表");
+baRenderAnniv();
+</script>
+<!-- BOARD-A SCRIPT END -->
+  <script>
+/* ============ BOARD-B：カレンダー／富士山見え指数／花粉メモ／背景切替（独立ブロック） ============ */
+(function () {
+  function bbEl(id) { return document.getElementById(id); }
+
+  /* ---------- (39) 月カレンダー ---------- */
+  var bbToday = new Date();
+  var bbCalY = bbToday.getFullYear();
+  var bbCalM = bbToday.getMonth();
+  var BB_DOW = ["日", "月", "火", "水", "木", "金", "土"];
+  function bbRenderCal() {
+    var title = bbEl("bbCalTitle");
+    var grid = bbEl("bbCalGrid");
+    if (!title || !grid) return;
+    title.textContent = bbCalY + "年" + (bbCalM + 1) + "月";
+    var startDay = new Date(bbCalY, bbCalM, 1).getDay();
+    var lastDate = new Date(bbCalY, bbCalM + 1, 0).getDate();
+    var now = new Date();
+    var isThisMonth = (now.getFullYear() === bbCalY && now.getMonth() === bbCalM);
+    var html = '<table style="border-collapse:collapse;width:100%;max-width:430px;margin:0 auto;text-align:center;font-size:17px;">';
+    var d, w, day = 1;
+    html += "<tr>";
+    for (d = 0; d < 7; d++) {
+      var hc = d === 0 ? "#c0392b" : (d === 6 ? "#2471a3" : "inherit");
+      html += '<th style="padding:6px 0;color:' + hc + ';">' + BB_DOW[d] + "</th>";
+    }
+    html += "</tr>";
+    for (w = 0; w < 6; w++) {
+      html += "<tr>";
+      for (d = 0; d < 7; d++) {
+        var cellNum = w * 7 + d;
+        if (cellNum < startDay || day > lastDate) {
+          html += '<td style="padding:7px 0;"></td>';
+        } else {
+          var col = d === 0 ? "#c0392b" : (d === 6 ? "#2471a3" : "inherit");
+          var st = "padding:7px 0;color:" + col + ";";
+          if (isThisMonth && day === now.getDate()) st += "background:#ffe082;border-radius:50%;font-weight:900;";
+          html += '<td style="' + st + '">' + day + "</td>";
+          day++;
+        }
+      }
+      html += "</tr>";
+      if (day > lastDate) break;
+    }
+    html += "</table>";
+    grid.innerHTML = html;
+  }
+  var bbPrev = bbEl("bbCalPrev");
+  var bbNext = bbEl("bbCalNext");
+  if (bbPrev) bbPrev.addEventListener("click", function () {
+    bbCalM--; if (bbCalM < 0) { bbCalM = 11; bbCalY--; } bbRenderCal();
+  });
+  if (bbNext) bbNext.addEventListener("click", function () {
+    bbCalM++; if (bbCalM > 11) { bbCalM = 0; bbCalY++; } bbRenderCal();
+  });
+  bbRenderCal();
+
+  /* ---------- 共通：JSON取得 ---------- */
+  function bbGetJSON(url, ok, ng) {
+    var x = new XMLHttpRequest();
+    var done = false;
+    function fail() { if (!done) { done = true; ng(); } }
+    x.open("GET", url, true);
+    x.timeout = 15000;
+    x.onreadystatechange = function () {
+      if (x.readyState !== 4) return;
+      if (x.status >= 200 && x.status < 300) {
+        try { var j = JSON.parse(x.responseText); if (!done) { done = true; ok(j); } }
+        catch (e) { fail(); }
+      } else fail();
+    };
+    x.onerror = fail;
+    x.ontimeout = fail;
+    x.send();
+  }
+
+  /* ---------- (40) 富士山見え指数 ＆ (41) 花粉の風 ---------- */
+  function bbPollenSeasonText(m) {
+    if (m === 1) return "スギ花粉が飛び始める頃です（下旬〜）。";
+    if (m === 2) return "スギ花粉の多い時期です。";
+    if (m === 3) return "スギ花粉のピークに、ヒノキ花粉も出てくる時期です。";
+    if (m === 4) return "ヒノキ花粉の多い時期です（スギは終わり頃）。";
+    if (m === 5) return "ヒノキ花粉は終わり頃。イネ科の花粉が少し出る時期です。";
+    if (m === 6 || m === 7) return "イネ科の花粉が少し出る時期です（梅雨どきは少なめ）。";
+    if (m === 8) return "ブタクサなど秋の花粉が出始める時期です。";
+    if (m === 9 || m === 10) return "ブタクサ・ヨモギなど秋の花粉の時期です。";
+    return "花粉は少なめの時期です。";
+  }
+  var bbSeason = bbEl("bbPollenSeason");
+  if (bbSeason) bbSeason.textContent = "季節の目安（埼玉県周辺・一般的な目安）： " + bbPollenSeasonText(bbToday.getMonth() + 1);
+
+  function bbWindDirName(deg) {
+    var names = ["北", "北北東", "北東", "東北東", "東", "東南東", "南東", "南南東", "南", "南南西", "南西", "西南西", "西", "西北西", "北西", "北北西"];
+    return names[Math.round(deg / 22.5) % 16];
+  }
+  function bbShowFuji(vis, rh, cc) {
+    var v = bbEl("bbFujiView");
+    if (!v) return;
+    if (vis == null) { v.textContent = "見通し（視程）のデータを取得できませんでした。"; return; }
+    var visKm = vis / 1000;
+    var score = Math.min(95, Math.round(visKm * 2.4));
+    if (rh != null) { if (rh > 80) score -= 25; else if (rh > 70) score -= 15; else if (rh > 60) score -= 8; }
+    if (cc != null) { if (cc > 80) score -= 25; else if (cc > 50) score -= 15; else if (cc > 30) score -= 8; }
+    if (score < 0) score = 0;
+    if (score > 100) score = 100;
+    var label = score >= 60 ? "よく見えそう" : (score >= 35 ? "見えるかも" : "今日はむずかしそう");
+    v.innerHTML = "";
+    var big = document.createElement("div");
+    big.style.cssText = "font-size:22px;font-weight:900;";
+    big.textContent = "指数 " + score + " ／ " + label;
+    var det = document.createElement("div");
+    det.textContent = "見通し 約" + (Math.round(visKm * 10) / 10) + "km ・ 湿度 " + (rh == null ? "—" : rh + "%") + " ・ 雲の量 " + (cc == null ? "—" : cc + "%");
+    v.appendChild(big);
+    v.appendChild(det);
+  }
+  function bbShowWind(ws, wd) {
+    var v = bbEl("bbPollenWind");
+    if (!v) return;
+    if (ws == null) { v.textContent = "風のデータは取得できませんでした。"; return; }
+    var line = "今日の風： " + bbWindDirName(wd || 0) + "の風 " + Math.round(ws) + "km/h。";
+    if (ws >= 20) line += "風が強めです。風が強い日は花粉が飛びやすいと言われます。";
+    else if (ws >= 10) line += "風の強さはふつうです。";
+    else line += "風は弱めです。";
+    v.textContent = line;
+  }
+  function bbFailSky() {
+    var v = bbEl("bbFujiView");
+    if (v) v.textContent = "データを取得できませんでした。通信状態を確認して、ページを開き直してみてください。";
+    bbShowWind(null, 0);
+  }
+  var BB_SKY_URL = "https://api.open-meteo.com/v1/forecast?latitude=35.8795&longitude=139.5197&current=relative_humidity_2m,cloud_cover,wind_speed_10m,wind_direction_10m&hourly=visibility&forecast_days=1&timezone=Asia%2FTokyo";
+  bbGetJSON(BB_SKY_URL, function (j) {
+    try {
+      var cur = j.current || {};
+      var vis = null;
+      if (j.hourly && j.hourly.time && j.hourly.visibility) {
+        var key = (cur.time || "").substring(0, 13);
+        var idx = -1;
+        for (var i = 0; i < j.hourly.time.length; i++) {
+          if (j.hourly.time[i].substring(0, 13) === key) { idx = i; break; }
+        }
+        if (idx < 0) idx = Math.min(new Date().getHours(), j.hourly.visibility.length - 1);
+        vis = j.hourly.visibility[idx];
+      }
+      bbShowFuji(vis, cur.relative_humidity_2m, cur.cloud_cover);
+      bbShowWind(cur.wind_speed_10m, cur.wind_direction_10m);
+    } catch (e) { bbFailSky(); }
+  }, bbFailSky);
+
+  /* ---------- (45) 背景グラデーション切替 ---------- */
+  var bbBgBtns = document.querySelectorAll(".bbBgBtn");
+  for (var b = 0; b < bbBgBtns.length; b++) {
+    bbBgBtns[b].addEventListener("click", function () {
+      document.body.style.background = this.getAttribute("data-bbg") || "";
+    });
+  }
+})();
+</script>
+</body>
 </html>
