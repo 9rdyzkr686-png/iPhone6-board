@@ -1562,6 +1562,26 @@
           <p class="asof" id="bw4TocCount"></p>
         </section>
       <!-- BOARD-W4 END -->
+      <!-- BOARD-W5 START -->
+        <section class="card pet-sec" id="bw5TocPet" style="grid-column:1/-1;" aria-label="育成タブ目次">
+          <h2>🧭 育成タブ目次 <span class="tag">ジャンプ</span></h2>
+          <p style="font-size:14px;color:var(--ink-soft);margin:0 0 10px;">育成タブのカードへの目次です。ボタンを押すと、そのカードまでスクロールして光ります。</p>
+          <div id="bw5TocGridPet" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+          <p class="asof" id="bw5TocCountPet"></p>
+        </section>
+        <section class="card play-sec" id="bw5TocPlay" style="grid-column:1/-1;" aria-label="あそびタブ目次">
+          <h2>🧭 あそびタブ目次 <span class="tag">ジャンプ</span></h2>
+          <p style="font-size:14px;color:var(--ink-soft);margin:0 0 10px;">あそびタブのカードへの目次です。ボタンを押すと、そのカードまでスクロールして光ります。</p>
+          <div id="bw5TocGridPlay" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+          <p class="asof" id="bw5TocCountPlay"></p>
+        </section>
+        <section class="card tool-sec" id="bw5TocTool" style="grid-column:1/-1;" aria-label="ツールタブ目次">
+          <h2>🧭 ツールタブ目次 <span class="tag">ジャンプ</span></h2>
+          <p style="font-size:14px;color:var(--ink-soft);margin:0 0 10px;">ツールタブのカードへの目次です。ボタンを押すと、そのカードまでスクロールして光ります。</p>
+          <div id="bw5TocGridTool" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+          <p class="asof" id="bw5TocCountTool"></p>
+        </section>
+      <!-- BOARD-W5 END -->
 </div>
       
 <div id="toast"></div>
@@ -5779,6 +5799,80 @@ baRenderAnniv();
     bw4Btns[b].addEventListener("click", function () { setTimeout(bw4Sync, 0); });
   }
   setInterval(bw4Sync, 800);
+})();
+</script>
+<script>
+(function () {
+  /* BOARD-W5: 育成・あそび・ツールタブ目次ジャンプ（264） */
+  var bw5Layout = document.querySelector(".layout");
+
+  function bw5Title(sec) {
+    var h = sec.querySelector("h2, h3, .card-title");
+    var t = "";
+    if (h) {
+      for (var i = 0; i < h.childNodes.length; i++) {
+        var n = h.childNodes[i];
+        if (n.nodeType === 3) t += n.nodeValue;
+        else if (n.nodeType === 1 && (" " + (typeof n.className === "string" ? n.className : "") + " ").indexOf(" tag ") < 0) t += n.textContent || "";
+      }
+      t = t.replace(/^\s+|\s+$/g, "").replace(/\s+/g, " ");
+    }
+    if (!t) t = (sec.getAttribute("aria-label") || "").replace(/^\s+|\s+$/g, "");
+    return t;
+  }
+
+  function bw5Flash(sec) {
+    if (sec._bw5Timer) clearTimeout(sec._bw5Timer);
+    sec.style.outline = "3px solid #e67e22";
+    sec.style.outlineOffset = "-3px";
+    sec._bw5Timer = setTimeout(function () {
+      sec.style.outline = "";
+      sec.style.outlineOffset = "";
+    }, 1200);
+  }
+
+  function bw5Jump(sec) {
+    var done = false;
+    try {
+      if (sec.scrollIntoView) { sec.scrollIntoView(); done = true; }
+    } catch (e) { done = false; }
+    if (!done) {
+      var t = 0, n = sec;
+      while (n) { t += n.offsetTop || 0; n = n.offsetParent; }
+      window.scrollTo(0, Math.max(0, t - 10));
+    }
+    bw5Flash(sec);
+  }
+
+  function bw5Build(gridId, countId, selector, selfEl) {
+    var grid = document.getElementById(gridId);
+    if (!grid) return;
+    var root = bw5Layout || document;
+    var secs = root.querySelectorAll(selector);
+    var made = 0;
+    for (var i = 0; i < secs.length; i++) {
+      var sec = secs[i];
+      if (sec === selfEl) continue;
+      if (sec.id === "bw5TocPet" || sec.id === "bw5TocPlay" || sec.id === "bw5TocTool") continue;
+      var title = bw5Title(sec);
+      if (!title) continue;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = title;
+      btn.style.cssText = "flex:1 1 46%;min-height:48px;padding:10px 8px;font-size:16px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);";
+      (function (target, b) {
+        b.addEventListener("click", function () { bw5Jump(target); });
+      })(sec, btn);
+      grid.appendChild(btn);
+      made++;
+    }
+    var count = document.getElementById(countId);
+    if (count) count.textContent = made > 0 ? "全" + made + "カード" : "目次を作れませんでした";
+  }
+
+  bw5Build("bw5TocGridPet", "bw5TocCountPet", ".pet-sec", document.getElementById("bw5TocPet"));
+  bw5Build("bw5TocGridPlay", "bw5TocCountPlay", ".play-sec", document.getElementById("bw5TocPlay"));
+  bw5Build("bw5TocGridTool", "bw5TocCountTool", ".tool-sec", document.getElementById("bw5TocTool"));
 })();
 </script>
 </body>
