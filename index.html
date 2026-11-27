@@ -565,6 +565,29 @@
           <p class="asof" id="newsAsof"></p>
         </section>
 
+        <!-- BOARD-C START -->
+        <section class="card info-sec" style="grid-column:1/-1;" aria-label="CUTIE STREET楽曲リンク">
+          <h2>CUTIE STREET 楽曲リンク <span class="tag">動画・音楽サービスで探す</span></h2>
+          <div class="playbox">
+            <h3>🎵 有名な曲（タイトルだけ紹介）</h3>
+            <div class="playlog">・かわいいだけじゃだめですか？（デビュー曲）
+・ひたむきシンデレラ！
+・ほかにもたくさんあります。下のリンクから探してみてね。</div>
+            <div class="playlog" id="ccDailySong"></div>
+          </div>
+          <div class="playbox">
+            <h3>🔗 楽曲を探す（外部サイト）</h3>
+            <div class="mini-row" style="line-height:2.2;">
+              <a href="https://www.youtube.com/results?search_query=CUTIE+STREET" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;display:inline-block;padding:6px 4px;">▶ YouTubeで探す</a><br />
+              <a href="https://www.youtube.com/results?search_query=CUTIE+STREET+%E3%81%8B%E3%82%8F%E3%81%84%E3%81%84%E3%81%A0%E3%81%91%E3%81%98%E3%82%83%E3%81%A0%E3%82%81%E3%81%A7%E3%81%99%E3%81%8B%EF%BC%9F" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;display:inline-block;padding:6px 4px;">🎬 「かわいいだけじゃだめですか？」のMVをYouTubeで探す</a><br />
+              <a href="https://open.spotify.com/search/CUTIE%20STREET" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;display:inline-block;padding:6px 4px;">🎧 Spotifyで探す</a><br />
+              <a href="https://music.apple.com/jp/search?term=CUTIE%20STREET" target="_blank" rel="noopener" style="font-size:1.05rem;font-weight:700;display:inline-block;padding:6px 4px;">🍎 Apple Musicで探す</a>
+            </div>
+            <p class="asof">※ 外部サイトが開きます。iPhone 6では再生できない場合があります。</p>
+          </div>
+        </section>
+        <!-- BOARD-C END -->
+
         <!-- あそびコーナー -->
         <section class="card" style="grid-column:1/-1;" aria-label="あそびコーナー">
           <h2>あそびコーナー <span class="tag">ダックスと遊ぶ</span></h2>
@@ -4921,6 +4944,25 @@ baRenderAnniv();
     bbBgBtns[b].addEventListener("click", function () {
       document.body.style.background = this.getAttribute("data-bbg") || "";
     });
+  }
+})();
+</script>
+<script>
+/* BOARD-C: CUTIE STREET楽曲リンク（日替わりおすすめ曲） */
+(function () {
+  var CC_SONGS = ["かわいいだけじゃだめですか？", "ひたむきシンデレラ！"];
+  function ccInit() {
+    var el = document.getElementById("ccDailySong");
+    if (!el) return;
+    var d = new Date();
+    var seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+    var song = CC_SONGS[seed % CC_SONGS.length];
+    el.innerHTML = "🎧 今日のおすすめは「" + song + "」。下のリンクから探してみてね。";
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ccInit);
+  } else {
+    ccInit();
   }
 })();
 </script>
